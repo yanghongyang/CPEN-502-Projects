@@ -55,5 +55,4 @@ public interface NeuralNetInterface {
      */
     public void zeroWeights();
 
-
 } // End of public interface NeuralNetInterface
