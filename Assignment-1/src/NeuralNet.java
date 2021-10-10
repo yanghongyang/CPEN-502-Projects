@@ -32,15 +32,25 @@ public class NeuralNet implements NeuralNetInterface{
     private Double[][] w1 = new Double[inputNum + 1][hiddenNum];
     private Double[][] w2 = new Double[hiddenNum + 1][outputNum];
 
+    /* deltaOutput and deltaHidden: the previous weight change */
+
+    private Double[] deltaOutput = new Double[outputNum];
+    private Double[] deltaHidden = new Double[hiddenNum];
+
     // error signal matrix delta
 
     private Double[][] deltaw1 = new Double[inputNum + 1][hiddenNum + 1];
     private Double[][] deltaw2 = new Double[hiddenNum + 1][outputNum + 1];
 
+    // error
+
+    private Double[] totalError = new Double[outputNum];
+    private Double[] singleError = new Double[outputNum];
+
     // training set
 
-    private Integer[][] trainX;
-    private Integer[][] trainY;
+    private Double[][] trainX;
+    private Double[][] trainY;
 
     public NeuralNet() {
     }
@@ -67,15 +77,15 @@ public class NeuralNet implements NeuralNetInterface{
 
     @Override
     public double customSigmoid(double x) {
-        return 0;
+        return (b - a) / (1 + Math.exp(-x)) + a;
     }
 
     /**
      * Initialization step 1 : initialize the training dataset(XOR dataset)
      */
     public void initializeTrainSet() {
-        trainX = new Integer[][]{{0, 0}, {0, 1}, {1, 0}, {1, 1}};
-        trainY = new Integer[][]{{0}, {1}, {1}, {0}};
+        trainX = new Double[][]{{0d, 0d}, {0d, 1d}, {1d, 0d}, {1d, 1d}};
+        trainY = new Double[][]{{0d}, {1d}, {1d}, {0d}};
     }
 
     /**
@@ -132,21 +142,40 @@ public class NeuralNet implements NeuralNetInterface{
     }
 
     /**
-     * Algorithm step 2: Perform a backward propagation
+     * Algorithm step 2: Perform a backward propagation & Update weights
      */
     public void backwardPropagation() {
 
         // compute the errors of output units
-        for(int j = 0; j < outputNum; j++) {
-
+        for(int k = 0; k < outputNum; k++) {
+            deltaOutput[k] = 0d;
+            deltaOutput[k] = outputLayer[k] * (1 - outputLayer[k]) * singleError[k];
         }
-    }
 
-    /**
-     * Algorithm step 3: Update weights
-     */
-    public void updateWeights() {
+        // update w2
+        for(int k = 0; k < outputNum; k++) {
+            for(int j = 0; j < hiddenNum; j++) {
+                deltaw2[j][k] = momentum * deltaw2[j][k] + learningRate * deltaOutput[k] * hiddenLayer[j];
+                w2[j][k] += deltaw2[j][k];
+            }
+        }
 
+        // compute the errors of hidden units
+        for(int j = 0; j < hiddenNum; j++) {
+            deltaHidden[j] = 0d;
+            for(int k = 0; k < outputNum; k++) {
+                deltaHidden[j] += w2[j][k] * deltaOutput[k];
+            }
+            deltaHidden[j] = deltaHidden[j] * hiddenLayer[j] * (1 - hiddenLayer[j]);
+        }
+
+        // update w1
+        for(int j = 0; j < hiddenNum; j++) {
+            for(int i = 0; i < inputNum; i++) {
+                deltaw1[i][j] = momentum * deltaw1[i][j] + learningRate * deltaHidden[j] * inputLayer[i];
+                w1[i][j] += deltaw1[i][j];
+            }
+        }
     }
 
     /**
