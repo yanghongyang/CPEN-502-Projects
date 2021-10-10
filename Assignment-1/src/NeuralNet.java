@@ -1,6 +1,3 @@
-import com.sun.xml.internal.bind.v2.runtime.output.DOMOutput;
-import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -136,7 +133,7 @@ public class NeuralNet implements NeuralNetInterface{
     /**
      * Initialization step 3: Initialize the input layer
      */
-    public void initializeInputLayer(@NotNull Double[] sample) {
+    public void initializeInputLayer(Double[] sample) {
         for(int i = 0; i < sample.length; i++) {
             inputLayer[i] = sample[i];
         }
