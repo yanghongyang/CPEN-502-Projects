@@ -1,4 +1,11 @@
 import com.sun.xml.internal.bind.v2.runtime.output.DOMOutput;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.LinkedList;
+import java.util.List;
 
 public class NeuralNet implements NeuralNetInterface{
 
@@ -8,6 +15,7 @@ public class NeuralNet implements NeuralNetInterface{
     // 3) weights: [-0.5, 0.5];
     // 4) learning rate: 0.2;
     // 5) momentum: 0.0
+    // 6) errorThreshold = 0.05;
 
     private Integer inputNum = 2;
     private Integer hiddenNum = 4;
@@ -18,6 +26,7 @@ public class NeuralNet implements NeuralNetInterface{
     private Double initWeightFloor = -0.5;
     private Integer a = 0;
     private Integer b = 1;
+    private Double errorThreshold = 0.05;
 
     // define layers
 
@@ -46,6 +55,10 @@ public class NeuralNet implements NeuralNetInterface{
 
     private Double[] totalError = new Double[outputNum];
     private Double[] singleError = new Double[outputNum];
+
+    // save the total error in a list
+
+    private List<String> errorList = new LinkedList<>();
 
     // training set
 
@@ -121,22 +134,35 @@ public class NeuralNet implements NeuralNetInterface{
     }
 
     /**
+     * Initialization step 3: Initialize the input layer
+     */
+    public void initializeInputLayer(@NotNull Double[] sample) {
+        for(int i = 0; i < sample.length; i++) {
+            inputLayer[i] = sample[i];
+        }
+    }
+
+    /**
      * Algorithm step 1: Perform a forward propagation
      */
-    public void forwardPropagation() {
-
+    public void forwardPropagation(Double[] sample) {
+        // initialize the input layer first
+        initializeInputLayer(sample);
         // from input layer to hidden layer
         for(int j = 0; j < hiddenNum; j++) {
             // for each node in the hidden layer, compute the Sj
             for(int i = 0; i < inputNum; i++) {
                 hiddenLayer[j] += w1[i][j] * inputLayer[i];
             }
+            // can use custom sigmoid as an activation function
+            hiddenLayer[j] = sigmoid(hiddenLayer[j]);
         }
         // from hidden layer to output layer
         for(int k = 0; k < outputNum; k++) {
             for(int j = 0; j < hiddenNum; j++) {
                 outputLayer[k] += w2[j][k] * hiddenLayer[j];
             }
+            // can use custom sigmoid as an activation function
             outputLayer[k] = sigmoid(outputLayer[k]);
         }
     }
@@ -179,9 +205,41 @@ public class NeuralNet implements NeuralNetInterface{
     }
 
     /**
-     * Calculate the total error
-     */
-    public Double calTotalError() {
-        return 0.0;
+     * train the neural network to see the number of epoch
+     * */
+    public int trainNet() {
+        errorList.clear();
+        int epoch = 0;
+        while(totalError[0] >= errorThreshold) {
+            for(int k = 0; k < outputNum; k++) {
+                totalError[k] = 0d;
+            }
+            // Calculate the total error: 1. calculate the sum and apply the pow
+            for(int i = 0; i < trainX.length; i++) {
+                Double[] sample = trainX[i];
+                forwardPropagation(sample);
+                for(int k = 0; k < outputNum; k++) {
+                    singleError[k] = trainY[i][k] - outputLayer[k];
+                    totalError[k] += Math.pow(singleError[k], 2);
+                }
+                backwardPropagation();
+            }
+            // Calculate the total error: 2. divide the totalError by 2
+            for(int k = 0; k < outputNum; k++) {
+                totalError[k] /= 2;
+                System.out.println("The total error of output number " + (k + 1) + ": " + totalError[k]);
+            }
+            errorList.add(epoch + ":" + Double.toString(totalError[0]));
+            epoch++;
+        }
+        return epoch;
+    }
+
+    public void saveError() {
+        try {
+            Files.write(Paths.get("./trainTotalError.txt"), errorList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
