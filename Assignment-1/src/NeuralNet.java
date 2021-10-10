@@ -239,4 +239,5 @@ public class NeuralNet implements NeuralNetInterface{
             e.printStackTrace();
         }
     }
+
 }
