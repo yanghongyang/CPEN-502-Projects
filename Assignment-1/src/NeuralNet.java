@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -246,6 +247,16 @@ public class NeuralNet implements NeuralNetInterface{
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    public void preSaveError() {
+        File file = new File("./Error");
+        if(!file.isFile()) {
+            String[] childFilePath = file.list();
+            for(String path : childFilePath) {
+                File childFile = new File(file.getAbsoluteFile() + "/" + path);
+                childFile.delete();
+            }
         }
     }
 
