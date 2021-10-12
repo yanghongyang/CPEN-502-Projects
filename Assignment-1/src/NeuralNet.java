@@ -41,23 +41,15 @@ public class NeuralNet implements NeuralNetInterface{
 
     private double[] deltaOutput = new double[outputNum];
     private double[] deltaHidden = new double[hiddenNum];
-
     // error signal matrix delta
-
     private double[][] deltaw1 = new double[inputNum + 1][hiddenNum + 1];
     private double[][] deltaw2 = new double[hiddenNum + 1][outputNum + 1];
-
     // error
-
     private double[] totalError = new double[outputNum];
     private double[] singleError = new double[outputNum];
-
     // save the total error in a list
-
     private List<String> errorList = new LinkedList<>();
-
     // training set
-
     private double[][] trainX;
     private double[][] trainY;
 
