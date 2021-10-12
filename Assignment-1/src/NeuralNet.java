@@ -245,7 +245,6 @@ public class NeuralNet implements NeuralNetInterface{
 
         return epoch;
     }
-
     public void saveError() {
         try {
             Files.write(Paths.get("./trainTotalError.txt"), errorList);
