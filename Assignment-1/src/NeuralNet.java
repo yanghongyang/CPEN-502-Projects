@@ -14,7 +14,6 @@ public class NeuralNet implements NeuralNetInterface{
     // 4) learning rate: 0.2;
     // 5) momentum: 0.0
     // 6) errorThreshold = 0.05;
-
     private Integer inputNum = 2;
     private Integer hiddenNum = 4;
     private Integer outputNum = 1;
