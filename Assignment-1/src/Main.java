@@ -1,7 +1,7 @@
 public class Main {
 
     public static void main(String[] args) {
-        NeuralNet xor = new NeuralNet();
+        NeuralNet xor = new NeuralNet(2, 4, 1, 0.2, 0d, 0, 1);
 
         xor.initializeTrainSet();
 

@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,41 +18,41 @@ public class NeuralNet implements NeuralNetInterface{
     private Integer inputNum = 2;
     private Integer hiddenNum = 4;
     private Integer outputNum = 1;
-    private Double learningRate = 0.2;
-    private Double momentum = 0.0;
-    private Double initWeightCeiling = 0.5;
-    private Double initWeightFloor = -0.5;
+    private double learningRate = 0.2;
+    private double momentum = 0.0;
+    private double initWeightCeiling = 0.5;
+    private double initWeightFloor = -0.5;
     private Integer a = 0;
     private Integer b = 1;
-    private Double errorThreshold = 0.05;
+    private double errorThreshold = 0.05;
 
     // define layers
 
-    private Double[] inputLayer = new Double[inputNum + 1];
-    private Double[] hiddenLayer = new Double[hiddenNum + 1];
-    private Double[] outputLayer = new Double[outputNum + 1];
+    private double[] inputLayer = new double[inputNum + 1];
+    private double[] hiddenLayer = new double[hiddenNum + 1];
+    private double[] outputLayer = new double[outputNum + 1];
 
     // weight matrix
     // The first weighing matrix between the input layer and hidden layer
     // The second weighing matrix between the hidden layer and output layer
 
-    private Double[][] w1 = new Double[inputNum + 1][hiddenNum];
-    private Double[][] w2 = new Double[hiddenNum + 1][outputNum];
+    private double[][] w1 = new double[inputNum + 1][hiddenNum];
+    private double[][] w2 = new double[hiddenNum + 1][outputNum];
 
     /* deltaOutput and deltaHidden: the previous weight change */
 
-    private Double[] deltaOutput = new Double[outputNum];
-    private Double[] deltaHidden = new Double[hiddenNum];
+    private double[] deltaOutput = new double[outputNum];
+    private double[] deltaHidden = new double[hiddenNum];
 
     // error signal matrix delta
 
-    private Double[][] deltaw1 = new Double[inputNum + 1][hiddenNum + 1];
-    private Double[][] deltaw2 = new Double[hiddenNum + 1][outputNum + 1];
+    private double[][] deltaw1 = new double[inputNum + 1][hiddenNum + 1];
+    private double[][] deltaw2 = new double[hiddenNum + 1][outputNum + 1];
 
     // error
 
-    private Double[] totalError = new Double[outputNum];
-    private Double[] singleError = new Double[outputNum];
+    private double[] totalError = new double[outputNum];
+    private double[] singleError = new double[outputNum];
 
     // save the total error in a list
 
@@ -59,13 +60,13 @@ public class NeuralNet implements NeuralNetInterface{
 
     // training set
 
-    private Double[][] trainX;
-    private Double[][] trainY;
+    private double[][] trainX;
+    private double[][] trainY;
 
     public NeuralNet() {
     }
 
-    public NeuralNet(Integer inputNum, Integer hiddenNum, Integer outputNum, Double learningRate, Double momentum, Integer a, Integer b) {
+    public NeuralNet(Integer inputNum, Integer hiddenNum, Integer outputNum, double learningRate, double momentum, Integer a, Integer b) {
         this.inputNum = inputNum;
         this.hiddenNum = hiddenNum;
         this.outputNum = outputNum;
@@ -73,6 +74,18 @@ public class NeuralNet implements NeuralNetInterface{
         this.momentum = momentum;
         this.a = a;
         this.b = b;
+        inputLayer = new double[inputNum + 1];
+        hiddenLayer = new double[hiddenNum + 1];
+        outputLayer = new double[outputNum + 1];
+        w1 = new double[inputNum + 1][hiddenNum];
+        w2 = new double[hiddenNum + 1][outputNum];
+        deltaOutput = new double[outputNum];
+        deltaHidden = new double[hiddenNum];
+        deltaw1 = new double[inputNum + 1][hiddenNum + 1];
+        deltaw2 = new double[hiddenNum + 1][outputNum + 1];
+        totalError = new double[outputNum];
+        singleError = new double[outputNum];
+        errorList = new LinkedList<>();
     }
 
     /**
@@ -94,8 +107,8 @@ public class NeuralNet implements NeuralNetInterface{
      * Initialization step 1 : initialize the training dataset(XOR dataset)
      */
     public void initializeTrainSet() {
-        trainX = new Double[][]{{0d, 0d}, {0d, 1d}, {1d, 0d}, {1d, 1d}};
-        trainY = new Double[][]{{0d}, {1d}, {1d}, {0d}};
+        trainX = new double[][]{{0d, 0d}, {0d, 1d}, {1d, 0d}, {1d, 1d}};
+        trainY = new double[][]{{0d}, {1d}, {1d}, {0d}};
     }
 
     /**
@@ -133,7 +146,7 @@ public class NeuralNet implements NeuralNetInterface{
     /**
      * Initialization step 3: Initialize the input layer
      */
-    public void initializeInputLayer(Double[] sample) {
+    public void initializeInputLayer(double[] sample) {
         for(int i = 0; i < sample.length; i++) {
             inputLayer[i] = sample[i];
         }
@@ -142,7 +155,7 @@ public class NeuralNet implements NeuralNetInterface{
     /**
      * Algorithm step 1: Perform a forward propagation
      */
-    public void forwardPropagation(Double[] sample) {
+    public void forwardPropagation(double[] sample) {
         // initialize the input layer first
         initializeInputLayer(sample);
         // from input layer to hidden layer
@@ -205,15 +218,15 @@ public class NeuralNet implements NeuralNetInterface{
      * train the neural network to see the number of epoch
      * */
     public int trainNet() {
-        errorList.clear();
+        this.errorList.clear();
         int epoch = 0;
-        while(totalError[0] >= errorThreshold) {
+        do{
             for(int k = 0; k < outputNum; k++) {
                 totalError[k] = 0d;
             }
             // Calculate the total error: 1. calculate the sum and apply the pow
             for(int i = 0; i < trainX.length; i++) {
-                Double[] sample = trainX[i];
+                double[] sample = trainX[i];
                 forwardPropagation(sample);
                 for(int k = 0; k < outputNum; k++) {
                     singleError[k] = trainY[i][k] - outputLayer[k];
@@ -226,9 +239,10 @@ public class NeuralNet implements NeuralNetInterface{
                 totalError[k] /= 2;
                 System.out.println("The total error of output number " + (k + 1) + ": " + totalError[k]);
             }
-            errorList.add(epoch + ":" + Double.toString(totalError[0]));
+            errorList.add(epoch + ":" + totalError[0]);
             epoch++;
-        }
+        } while (totalError[0] > errorThreshold);
+
         return epoch;
     }
 
