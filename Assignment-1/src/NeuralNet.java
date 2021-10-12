@@ -155,7 +155,7 @@ public class NeuralNet implements NeuralNetInterface{
                 hiddenLayer[j] += w1[i][j] * inputLayer[i];
             }
             // can use custom sigmoid as an activation function
-            hiddenLayer[j] = sigmoid(hiddenLayer[j]);
+            hiddenLayer[j] = customSigmoid(hiddenLayer[j]);
         }
         // from hidden layer to output layer
         for(int k = 0; k < outputNum; k++) {
@@ -163,7 +163,7 @@ public class NeuralNet implements NeuralNetInterface{
                 outputLayer[k] += w2[j][k] * hiddenLayer[j];
             }
             // can use custom sigmoid as an activation function
-            outputLayer[k] = sigmoid(outputLayer[k]);
+            outputLayer[k] = customSigmoid(outputLayer[k]);
         }
     }
 
