@@ -23,6 +23,9 @@ public class NeuralNet implements NeuralNetInterface{
     private Integer b = 1;
     private double errorThreshold = 0.05;
 
+    // record the time of trainning
+    private long second = 0;
+
     // define layers
     // initialized to be zero
     private double[] inputLayer = new double[inputNum + 1];
@@ -74,7 +77,7 @@ public class NeuralNet implements NeuralNetInterface{
         this.b = b;
 
         this.datasetType = datasetType;
-
+        second = 0;
         epoch = 0;
 
     }
@@ -245,6 +248,7 @@ public class NeuralNet implements NeuralNetInterface{
     public int trainNet() {
         this.errorList.clear();
         epoch = 0;
+        long startTime = System.nanoTime();
         do{
             for(int k = 0; k < outputNum; k++) {
                 totalError[k] = 0;
@@ -266,7 +270,8 @@ public class NeuralNet implements NeuralNetInterface{
             errorList.add(String.valueOf(totalError[0]));
             epoch++;
         } while (totalError[0] > errorThreshold);
-
+        long endTime = System.nanoTime();
+        second = endTime - startTime;
         return epoch;
     }
     public void saveError() {
@@ -290,8 +295,22 @@ public class NeuralNet implements NeuralNetInterface{
                     childFile.delete();
                 }
             }
-
         }
     }
 
+    public long getSecond() {
+        return second;
+    }
+
+    public void setSecond(long second) {
+        this.second = second;
+    }
+
+    public double getMomentum() {
+        return momentum;
+    }
+
+    public void setMomentum(double momentum) {
+        this.momentum = momentum;
+    }
 }

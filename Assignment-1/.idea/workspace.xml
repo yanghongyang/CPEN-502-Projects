@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c33cea12-389a-4ba8-ac6e-a8f3715678f0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment-1/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment-1/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment-1/NeuralNet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment-1/NeuralNet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NeuralNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NeuralNet.java" afterDir="false" />
     </list>
