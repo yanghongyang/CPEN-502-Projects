@@ -276,7 +276,19 @@ public class NeuralNet implements NeuralNetInterface{
     }
     public void saveError() {
         try {
-            FileWriter fileWriter = new FileWriter("./trainTotalError-"  + datasetType + ".txt");
+            FileWriter fileWriter = new FileWriter("./TrainTotalError-"  + datasetType + "-" + epoch + ".txt");
+            for(String s : errorList) {
+                fileWriter.write(s + "\n");
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveMomentumError() {
+        try {
+            FileWriter fileWriter = new FileWriter("./TrainMomentumTotalError-"  + datasetType + "-" + epoch + ".txt");
             for(String s : errorList) {
                 fileWriter.write(s + "\n");
             }
