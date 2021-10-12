@@ -270,7 +270,7 @@ public class NeuralNet implements NeuralNetInterface{
     }
     public void saveError() {
         try {
-            FileWriter fileWriter = new FileWriter("./Error/trainTotalError" + epoch + ".txt");
+            FileWriter fileWriter = new FileWriter("./Error/trainTotalError-"  + datasetType + "-" + epoch + ".txt");
             for(String s : errorList) {
                 fileWriter.write(s + "\n");
             }
