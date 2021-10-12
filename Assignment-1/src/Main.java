@@ -5,17 +5,16 @@ public class Main {
 
         xor.initializeTrainSet();
 
-
         // Train for 3000 times(Binary representation)
         int times = 100;
         int epoch = 0;
         for(int i = 0; i < times; i++) {
             xor.initializeWeights();
             epoch += xor.trainNet();
+            xor.saveError();
         }
         epoch /= 100;
         System.out.println("Average epoch: " + epoch);
-        xor.saveError();
 
     }
 }
