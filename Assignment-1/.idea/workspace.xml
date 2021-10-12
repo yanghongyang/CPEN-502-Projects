@@ -2,6 +2,104 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c33cea12-389a-4ba8-ac6e-a8f3715678f0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2055.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2238.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2245.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2300.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2311.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2327.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2341.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2380.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2381.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2385.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2468.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2517.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2521.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2541.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2563.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2577.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2580.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2601.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2633.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2706.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2735.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2772.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Error/trainTotalError2772.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2787.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2818.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2848.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2852.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Error/trainTotalError2852.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2853.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2868.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2872.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2880.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2885.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2901.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2907.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2913.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2919.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2929.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2944.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2968.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2970.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Error/trainTotalError2970.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError2975.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3010.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3011.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3014.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Error/trainTotalError3014.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3015.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3022.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3031.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3052.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3056.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3068.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3075.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Error/trainTotalError3075.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3082.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3122.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3154.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3184.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3227.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3250.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3300.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3308.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3393.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3396.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3410.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3459.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3460.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3470.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Error/trainTotalError3470.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3473.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3493.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3514.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Error/trainTotalError3514.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3517.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Error/trainTotalError3517.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3534.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3544.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3604.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3621.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3633.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3743.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3801.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3810.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3817.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3826.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3890.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3900.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3906.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3920.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3929.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3936.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3941.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3950.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError3953.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError4015.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError4159.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError4182.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError4238.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError4294.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError4517.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError4539.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError4595.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError4961.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error/trainTotalError5674.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment-1/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment-1/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Assignment-1/NeuralNet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment-1/NeuralNet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NeuralNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NeuralNet.java" afterDir="false" />
