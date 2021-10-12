@@ -1,7 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -42,18 +41,25 @@ public class NeuralNet implements NeuralNetInterface{
     private double[] deltaOutput = new double[outputNum];
     private double[] deltaHidden = new double[hiddenNum];
     // error signal matrix delta
+
     private double[][] deltaw1 = new double[inputNum + 1][hiddenNum];
     private double[][] deltaw2 = new double[hiddenNum + 1][outputNum];
     // error
+
     private double[] totalError = new double[outputNum];
     private double[] singleError = new double[outputNum];
     // save the total error in a list
+
     private List<String> errorList = new LinkedList<>();
+
     // training set
+
     private double[][] trainX;
     private double[][] trainY;
     // tell dataset type between binary and bipolar
     private boolean datasetType; // if datasetType is True, it is binary; otherwise it is bipolar
+
+    private int epoch;
 
     public NeuralNet() {
     }
@@ -66,7 +72,11 @@ public class NeuralNet implements NeuralNetInterface{
         this.momentum = momentum;
         this.a = a;
         this.b = b;
+
         this.datasetType = datasetType;
+
+        epoch = 0;
+
     }
 
     /**
@@ -141,8 +151,10 @@ public class NeuralNet implements NeuralNetInterface{
         for(int i = 0; i < sample.length; i++) {
             inputLayer[i] = sample[i];
         }
-        inputLayer[inputNum] = 1; // assign b0 with 1
-        hiddenLayer[hiddenNum] = 1; // assign b1 with 1
+        // assign b0 with 1
+        inputLayer[inputNum] = 1;
+        // assign b1 with 1
+        hiddenLayer[hiddenNum] = 1;
     }
 
     /**
@@ -230,7 +242,7 @@ public class NeuralNet implements NeuralNetInterface{
      * */
     public int trainNet() {
         this.errorList.clear();
-        int epoch = 0;
+        epoch = 0;
         do{
             for(int k = 0; k < outputNum; k++) {
                 totalError[k] = 0;
@@ -250,7 +262,7 @@ public class NeuralNet implements NeuralNetInterface{
                 totalError[k] /= 2;
                 // System.out.println("The total error of output number " + (k + 1) + ": " + totalError[k]);
             }
-            errorList.add(epoch + ":" + totalError[0]);
+            errorList.add(String.valueOf(totalError[0]));
             epoch++;
         } while (totalError[0] > errorThreshold);
 
@@ -258,9 +270,23 @@ public class NeuralNet implements NeuralNetInterface{
     }
     public void saveError() {
         try {
-            Files.write(Paths.get("./trainTotalError.txt"), errorList);
+            FileWriter fileWriter = new FileWriter("./Error/trainTotalError" + epoch + ".txt");
+            for(String s : errorList) {
+                fileWriter.write(s + "\n");
+            }
+            fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    public void preSaveError() {
+        File file = new File("./Error");
+        if(!file.isFile()) {
+            String[] childFilePath = file.list();
+            for(String path : childFilePath) {
+                File childFile = new File(file.getAbsoluteFile() + "/" + path);
+                childFile.delete();
+            }
         }
     }
 

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c33cea12-389a-4ba8-ac6e-a8f3715678f0" name="Default Changelist" comment="" />
+    <list default="true" id="c33cea12-389a-4ba8-ac6e-a8f3715678f0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment-1/NeuralNet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment-1/NeuralNet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NeuralNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NeuralNet.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -145,7 +149,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634028372612</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Record all the total error files in .txt format. Change some annotations.">
+      <created>1634035041689</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1634035041689</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -170,6 +181,7 @@
     <MESSAGE value="Modify Double to double" />
     <MESSAGE value="delete lines" />
     <MESSAGE value="debug, change sigmoid to custom sigmoid" />
-    <option name="LAST_COMMIT_MESSAGE" value="debug, change sigmoid to custom sigmoid" />
+    <MESSAGE value="Record all the total error files in .txt format. Change some annotations." />
+    <option name="LAST_COMMIT_MESSAGE" value="Record all the total error files in .txt format. Change some annotations." />
   </component>
 </project>
