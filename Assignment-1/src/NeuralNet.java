@@ -16,7 +16,7 @@ public class NeuralNet implements NeuralNetInterface{
     private Integer hiddenNum = 4;
     private Integer outputNum = 1;
     private double learningRate = 0.2;
-    private double momentum = 1;
+    private double momentum = 0;
     private double initWeightCeiling = 0.5;
     private double initWeightFloor = -0.5;
     private Integer a = -1;
@@ -262,7 +262,6 @@ public class NeuralNet implements NeuralNetInterface{
             // Calculate the total error: 2. divide the totalError by 2
             for(int k = 0; k < outputNum; k++) {
                 totalError[k] /= 2;
-                // System.out.println("The total error of output number " + (k + 1) + ": " + totalError[k]);
             }
             errorList.add(String.valueOf(totalError[0]));
             epoch++;
@@ -272,7 +271,7 @@ public class NeuralNet implements NeuralNetInterface{
     }
     public void saveError() {
         try {
-            FileWriter fileWriter = new FileWriter("./trainTotalError-"  + datasetType + "-" + epoch + ".txt");
+            FileWriter fileWriter = new FileWriter("./trainTotalError-"  + datasetType + ".txt");
             for(String s : errorList) {
                 fileWriter.write(s + "\n");
             }

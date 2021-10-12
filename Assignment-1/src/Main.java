@@ -13,10 +13,9 @@ public class Main {
         for(int i = 0; i < times; i++) {
             xor.initializeWeights();
             epoch += xor.trainNet();
-            xor.saveError();
         }
         epoch /= 100;
-
+        xor.saveError();
         System.out.println("Average epoch for binary dataset: " + epoch);
 
         binary = false; // using bipolar
@@ -30,9 +29,9 @@ public class Main {
         for(int i = 0; i < times; i++) {
             xor.initializeWeights();
             epoch += xor.trainNet();
-            xor.saveError();
         }
         epoch /= 100;
+        xor.saveError();
         System.out.println("Average epoch for bipolar dataset: " + epoch);
     }
 }
