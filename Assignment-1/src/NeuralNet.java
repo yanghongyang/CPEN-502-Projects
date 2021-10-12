@@ -20,7 +20,7 @@ public class NeuralNet implements NeuralNetInterface{
     private double momentum = 1;
     private double initWeightCeiling = 0.5;
     private double initWeightFloor = -0.5;
-    private Integer a = 0;
+    private Integer a = -1;
     private Integer b = 1;
     private double errorThreshold = 0.05;
 
@@ -52,11 +52,13 @@ public class NeuralNet implements NeuralNetInterface{
     // training set
     private double[][] trainX;
     private double[][] trainY;
+    // tell dataset type between binary and bipolar
+    private boolean datasetType; // if datasetType is True, it is binary; otherwise it is bipolar
 
     public NeuralNet() {
     }
 
-    public NeuralNet(Integer inputNum, Integer hiddenNum, Integer outputNum, double learningRate, double momentum, Integer a, Integer b) {
+    public NeuralNet(Integer inputNum, Integer hiddenNum, Integer outputNum, double learningRate, double momentum, Integer a, Integer b, boolean datasetType) {
         this.inputNum = inputNum;
         this.hiddenNum = hiddenNum;
         this.outputNum = outputNum;
@@ -64,6 +66,7 @@ public class NeuralNet implements NeuralNetInterface{
         this.momentum = momentum;
         this.a = a;
         this.b = b;
+        this.datasetType = datasetType;
     }
 
     /**
@@ -82,15 +85,21 @@ public class NeuralNet implements NeuralNetInterface{
      */
     @Override
     public double customSigmoid(double x) {
-        return (b - a) / (1 + Math.exp(-x)) + a;
+        return (double)(b - a) / (1 + Math.exp(-x)) + a;
     }
 
     /**
      * Initialization step 1 : initialize the training dataset(XOR dataset)
      */
     public void initializeTrainSet() {
-        trainX = new double[][]{{0, 0}, {0, 1}, {1, 0}, {1, 1}};
-        trainY = new double[][]{{0}, {1}, {1}, {0}};
+        if(datasetType) { // binary dataset
+            trainX = new double[][]{{0, 0}, {0, 1}, {1, 0}, {1, 1}};
+            trainY = new double[][]{{0}, {1}, {1}, {0}};
+        }
+        else { // bipolar dataset
+            trainX = new double[][]{{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
+            trainY = new double[][]{{0}, {1}, {1}, {0}};
+        }
     }
 
     /**
@@ -149,7 +158,10 @@ public class NeuralNet implements NeuralNetInterface{
                 hiddenLayer[j] += w1[i][j] * inputLayer[i];
             }
             // can use custom sigmoid as an activation function
-            hiddenLayer[j] = customSigmoid(hiddenLayer[j]);
+            if(datasetType) // for binary dataset
+                {hiddenLayer[j] = sigmoid(hiddenLayer[j]);}
+            else // for bipolar dataset
+                {hiddenLayer[j] = customSigmoid(hiddenLayer[j]);}
         }
         // from hidden layer to output layer
         for(int k = 0; k < outputNum; k++) {
@@ -157,7 +169,12 @@ public class NeuralNet implements NeuralNetInterface{
                 outputLayer[k] += w2[j][k] * hiddenLayer[j];
             }
             // can use custom sigmoid as an activation function
-            outputLayer[k] = customSigmoid(outputLayer[k]);
+            if(datasetType) // for binary dataset
+                {outputLayer[k] = sigmoid(outputLayer[k]);}
+            else{ // for bipolar dataset
+                outputLayer[k] = customSigmoid(outputLayer[k]);
+            }
+
         }
     }
 
@@ -169,7 +186,12 @@ public class NeuralNet implements NeuralNetInterface{
         // compute the errors of output units
         for(int k = 0; k < outputNum; k++) {
             deltaOutput[k] = 0;
-            deltaOutput[k] = outputLayer[k] * (1 - outputLayer[k]) * singleError[k];
+            if(datasetType) // for binary dataset
+            {deltaOutput[k] = outputLayer[k] * (1 - outputLayer[k]) * singleError[k];}
+            else { // for bipolar dataset
+                deltaOutput[k] = 0.5 * (1 - Math.pow(outputLayer[k], 2)) * singleError[k];
+            }
+
         }
 
         // update w2
@@ -186,7 +208,12 @@ public class NeuralNet implements NeuralNetInterface{
             for(int k = 0; k < outputNum; k++) {
                 deltaHidden[j] += w2[j][k] * deltaOutput[k];
             }
-            deltaHidden[j] = deltaHidden[j] * hiddenLayer[j] * (1 - hiddenLayer[j]);
+            if(datasetType) // for binary dataset
+            {deltaHidden[j] = deltaHidden[j] * hiddenLayer[j] * (1 - hiddenLayer[j]);}
+            else { // for bipolar dataset
+                deltaHidden[j] = deltaHidden[j] * 0.5 * (1 - Math.pow(hiddenLayer[j], 2));
+            }
+
         }
 
         // update w1
