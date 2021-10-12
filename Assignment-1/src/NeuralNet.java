@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class NeuralNet implements NeuralNetInterface{
-
     // initialization:
     // 1) 2-input, 4-hidden, 1-output
     // 2) XOR training set
