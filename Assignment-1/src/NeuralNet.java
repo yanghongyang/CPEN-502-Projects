@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class NeuralNet implements NeuralNetInterface{
-
     // initialization:
     // 1) 2-input, 4-hidden, 1-output
     // 2) XOR training set
@@ -42,23 +41,15 @@ public class NeuralNet implements NeuralNetInterface{
 
     private double[] deltaOutput = new double[outputNum];
     private double[] deltaHidden = new double[hiddenNum];
-
     // error signal matrix delta
-
     private double[][] deltaw1 = new double[inputNum + 1][hiddenNum + 1];
     private double[][] deltaw2 = new double[hiddenNum + 1][outputNum + 1];
-
     // error
-
     private double[] totalError = new double[outputNum];
     private double[] singleError = new double[outputNum];
-
     // save the total error in a list
-
     private List<String> errorList = new LinkedList<>();
-
     // training set
-
     private double[][] trainX;
     private double[][] trainY;
 
