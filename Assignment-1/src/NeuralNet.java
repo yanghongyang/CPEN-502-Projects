@@ -95,6 +95,8 @@ public class NeuralNet implements NeuralNetInterface{
      */
     @Override
     public double customSigmoid(double x) {
+        Integer a = -1;
+        Integer b = 1;
         return (double)(b - a) / (1 + Math.exp(-x)) + a;
     }
 
@@ -283,10 +285,13 @@ public class NeuralNet implements NeuralNetInterface{
         File file = new File("./Error");
         if(!file.isFile()) {
             String[] childFilePath = file.list();
-            for(String path : childFilePath) {
-                File childFile = new File(file.getAbsoluteFile() + "/" + path);
-                childFile.delete();
+            if(childFilePath != null) {
+                for(String path : childFilePath) {
+                    File childFile = new File(file.getAbsoluteFile() + "/" + path);
+                    childFile.delete();
+                }
             }
+
         }
     }
 
