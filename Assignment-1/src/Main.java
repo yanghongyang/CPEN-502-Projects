@@ -7,7 +7,7 @@ public class Main {
 
 
         // Train for 3000 times(Binary representation)
-        int times = 3000;
+        int times = 100;
         int epoch = 0;
         for(int i = 0; i < times; i++) {
             xor.initializeWeights();

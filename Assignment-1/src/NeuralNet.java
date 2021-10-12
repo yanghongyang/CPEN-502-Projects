@@ -94,7 +94,7 @@ public class NeuralNet implements NeuralNetInterface{
      */
     @Override
     public double sigmoid(double x) {
-        return 2 / (1 + Math.exp(-x)) - 1;
+        return (double)2 / (1 + Math.exp(-x)) - 1;
     }
 
     @Override
@@ -236,7 +236,7 @@ public class NeuralNet implements NeuralNetInterface{
             // Calculate the total error: 2. divide the totalError by 2
             for(int k = 0; k < outputNum; k++) {
                 totalError[k] /= 2;
-                System.out.println("The total error of output number " + (k + 1) + ": " + totalError[k]);
+                // System.out.println("The total error of output number " + (k + 1) + ": " + totalError[k]);
             }
             errorList.add(epoch + ":" + totalError[0]);
             epoch++;
