@@ -17,7 +17,7 @@ public class NeuralNet implements NeuralNetInterface{
     private Integer hiddenNum = 4;
     private Integer outputNum = 1;
     private double learningRate = 0.2;
-    private double momentum = 0.0;
+    private double momentum = 1;
     private double initWeightCeiling = 0.5;
     private double initWeightFloor = -0.5;
     private Integer a = 0;
@@ -25,15 +25,15 @@ public class NeuralNet implements NeuralNetInterface{
     private double errorThreshold = 0.05;
 
     // define layers
-
+    // initialized to be zero
     private double[] inputLayer = new double[inputNum + 1];
     private double[] hiddenLayer = new double[hiddenNum + 1];
-    private double[] outputLayer = new double[outputNum + 1];
+    private double[] outputLayer = new double[outputNum];
 
     // weight matrix
     // The first weighing matrix between the input layer and hidden layer
     // The second weighing matrix between the hidden layer and output layer
-
+    // w1 & w2 are initialized to zero
     private double[][] w1 = new double[inputNum + 1][hiddenNum];
     private double[][] w2 = new double[hiddenNum + 1][outputNum];
 
@@ -42,8 +42,8 @@ public class NeuralNet implements NeuralNetInterface{
     private double[] deltaOutput = new double[outputNum];
     private double[] deltaHidden = new double[hiddenNum];
     // error signal matrix delta
-    private double[][] deltaw1 = new double[inputNum + 1][hiddenNum + 1];
-    private double[][] deltaw2 = new double[hiddenNum + 1][outputNum + 1];
+    private double[][] deltaw1 = new double[inputNum + 1][hiddenNum];
+    private double[][] deltaw2 = new double[hiddenNum + 1][outputNum];
     // error
     private double[] totalError = new double[outputNum];
     private double[] singleError = new double[outputNum];
@@ -64,30 +64,22 @@ public class NeuralNet implements NeuralNetInterface{
         this.momentum = momentum;
         this.a = a;
         this.b = b;
-        inputLayer = new double[inputNum + 1];
-        hiddenLayer = new double[hiddenNum + 1];
-        outputLayer = new double[outputNum + 1];
-        w1 = new double[inputNum + 1][hiddenNum];
-        w2 = new double[hiddenNum + 1][outputNum];
-        deltaOutput = new double[outputNum];
-        deltaHidden = new double[hiddenNum];
-        deltaw1 = new double[inputNum + 1][hiddenNum + 1];
-        deltaw2 = new double[hiddenNum + 1][outputNum + 1];
-        totalError = new double[outputNum];
-        singleError = new double[outputNum];
-        errorList = new LinkedList<>();
     }
 
+    /**
+     * Return a binary sigmoid of the input X(The activation function)
+     * @param x The input
+     * @return f(x) = 1 / (1+e(-x))
+     */
+    @Override
+    public double sigmoid(double x) {
+        return (double)1 / (1 + Math.exp(-x));
+    }
     /**
      * Return a bipolar sigmoid of the input X(The activation function)
      * @param x The input
      * @return f(x) = 2 / (1+e(-x)) - 1
      */
-    @Override
-    public double sigmoid(double x) {
-        return (double)2 / (1 + Math.exp(-x)) - 1;
-    }
-
     @Override
     public double customSigmoid(double x) {
         return (b - a) / (1 + Math.exp(-x)) + a;
@@ -97,8 +89,8 @@ public class NeuralNet implements NeuralNetInterface{
      * Initialization step 1 : initialize the training dataset(XOR dataset)
      */
     public void initializeTrainSet() {
-        trainX = new double[][]{{0d, 0d}, {0d, 1d}, {1d, 0d}, {1d, 1d}};
-        trainY = new double[][]{{0d}, {1d}, {1d}, {0d}};
+        trainX = new double[][]{{0, 0}, {0, 1}, {1, 0}, {1, 1}};
+        trainY = new double[][]{{0}, {1}, {1}, {0}};
     }
 
     /**
@@ -111,14 +103,14 @@ public class NeuralNet implements NeuralNetInterface{
     @Override
     public void initializeWeights() {
         // initialize w1 matrix
-        for(int i = 0; i < inputNum; i++) {
+        for(int i = 0; i < inputNum + 1; i++) { // "1" for the bias with no weights
             for(int j = 0; j < hiddenNum; j++) {
                 w1[i][j] = Math.random() - 0.5;
             }
         }
 
         // initialize w2 matrix
-        for(int i = 0; i < hiddenNum; i++) {
+        for(int i = 0; i < hiddenNum + 1; i++) { // "1" for the bias with no weights
             for(int j = 0; j < outputNum; j++) {
                 w2[i][j] = Math.random() - 0.5;
             }
@@ -140,6 +132,8 @@ public class NeuralNet implements NeuralNetInterface{
         for(int i = 0; i < sample.length; i++) {
             inputLayer[i] = sample[i];
         }
+        inputLayer[inputNum] = 1; // assign b0 with 1
+        hiddenLayer[hiddenNum] = 1; // assign b1 with 1
     }
 
     /**
@@ -151,7 +145,7 @@ public class NeuralNet implements NeuralNetInterface{
         // from input layer to hidden layer
         for(int j = 0; j < hiddenNum; j++) {
             // for each node in the hidden layer, compute the Sj
-            for(int i = 0; i < inputNum; i++) {
+            for(int i = 0; i < inputNum + 1; i++) {
                 hiddenLayer[j] += w1[i][j] * inputLayer[i];
             }
             // can use custom sigmoid as an activation function
@@ -159,7 +153,7 @@ public class NeuralNet implements NeuralNetInterface{
         }
         // from hidden layer to output layer
         for(int k = 0; k < outputNum; k++) {
-            for(int j = 0; j < hiddenNum; j++) {
+            for(int j = 0; j < hiddenNum + 1; j++) {
                 outputLayer[k] += w2[j][k] * hiddenLayer[j];
             }
             // can use custom sigmoid as an activation function
@@ -174,13 +168,13 @@ public class NeuralNet implements NeuralNetInterface{
 
         // compute the errors of output units
         for(int k = 0; k < outputNum; k++) {
-            deltaOutput[k] = 0d;
+            deltaOutput[k] = 0;
             deltaOutput[k] = outputLayer[k] * (1 - outputLayer[k]) * singleError[k];
         }
 
         // update w2
         for(int k = 0; k < outputNum; k++) {
-            for(int j = 0; j < hiddenNum; j++) {
+            for(int j = 0; j < hiddenNum + 1; j++) {
                 deltaw2[j][k] = momentum * deltaw2[j][k] + learningRate * deltaOutput[k] * hiddenLayer[j];
                 w2[j][k] += deltaw2[j][k];
             }
@@ -188,7 +182,7 @@ public class NeuralNet implements NeuralNetInterface{
 
         // compute the errors of hidden units
         for(int j = 0; j < hiddenNum; j++) {
-            deltaHidden[j] = 0d;
+            deltaHidden[j] = 0;
             for(int k = 0; k < outputNum; k++) {
                 deltaHidden[j] += w2[j][k] * deltaOutput[k];
             }
@@ -197,7 +191,7 @@ public class NeuralNet implements NeuralNetInterface{
 
         // update w1
         for(int j = 0; j < hiddenNum; j++) {
-            for(int i = 0; i < inputNum; i++) {
+            for(int i = 0; i < inputNum + 1; i++) {
                 deltaw1[i][j] = momentum * deltaw1[i][j] + learningRate * deltaHidden[j] * inputLayer[i];
                 w1[i][j] += deltaw1[i][j];
             }
@@ -212,7 +206,7 @@ public class NeuralNet implements NeuralNetInterface{
         int epoch = 0;
         do{
             for(int k = 0; k < outputNum; k++) {
-                totalError[k] = 0d;
+                totalError[k] = 0;
             }
             // Calculate the total error: 1. calculate the sum and apply the pow
             for(int i = 0; i < trainX.length; i++) {
