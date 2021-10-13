@@ -8,6 +8,7 @@ public class Main {
         int times = 100;
         int epoch = 0;
         xor.initializeTrainSet();
+        xor.preSaveError();
         // Train for 100 times(Binary representation)
         for(int i = 0; i < times; i++) {
             xor.initializeWeights();
