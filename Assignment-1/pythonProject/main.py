@@ -3,7 +3,7 @@ import re
 import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
-    path = '/Users/hannah/IdeaProjects/CPEN-502-Projects/Assignment-1'   # training result  documents path
+    path = '/Users/hannah/IdeaProjects/CPEN-502-Projects/Assignment-1/Error'   # training result  documents path
     files = os.listdir(path)  # acquire all document name under a folder
     number_binary = []
     number_bipolar = []
