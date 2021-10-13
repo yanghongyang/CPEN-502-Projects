@@ -17,8 +17,6 @@ public class NeuralNet implements NeuralNetInterface{
     private Integer outputNum = 1;
     private double learningRate = 0.2;
     private double momentum = 0;
-    private double initWeightCeiling = 0.5;
-    private double initWeightFloor = -0.5;
     private Integer a = -1;
     private Integer b = 1;
     private double errorThreshold = 0.05;
@@ -60,7 +58,8 @@ public class NeuralNet implements NeuralNetInterface{
     private double[][] trainX;
     private double[][] trainY;
     // tell dataset type between binary and bipolar
-    private boolean datasetType; // if datasetType is True, it is binary; otherwise it is bipolar
+    // if datasetType is True, it is binary; otherwise it is bipolar
+    private boolean datasetType;
 
     private int epoch;
 
@@ -75,11 +74,9 @@ public class NeuralNet implements NeuralNetInterface{
         this.momentum = momentum;
         this.a = a;
         this.b = b;
-
         this.datasetType = datasetType;
         second = 0;
         epoch = 0;
-
     }
 
     /**
@@ -107,7 +104,8 @@ public class NeuralNet implements NeuralNetInterface{
      * Initialization step 1 : initialize the training dataset(XOR dataset)
      */
     public void initializeTrainSet() {
-        if(datasetType) { // binary dataset
+        // binary dataset
+        if(datasetType) {
             trainX = new double[][]{{0, 0}, {0, 1}, {1, 0}, {1, 1}};
             trainY = new double[][]{{0}, {1}, {1}, {0}};
         }
@@ -127,14 +125,15 @@ public class NeuralNet implements NeuralNetInterface{
     @Override
     public void initializeWeights() {
         // initialize w1 matrix
-        for(int i = 0; i < inputNum + 1; i++) { // "1" for the bias with no weights
+        // "1" for the bias with no weights
+        for(int i = 0; i < inputNum + 1; i++) {
             for(int j = 0; j < hiddenNum; j++) {
                 w1[i][j] = Math.random() - 0.5;
             }
         }
-
         // initialize w2 matrix
-        for(int i = 0; i < hiddenNum + 1; i++) { // "1" for the bias with no weights
+        // "1" for the bias with no weights
+        for(int i = 0; i < hiddenNum + 1; i++) {
             for(int j = 0; j < outputNum; j++) {
                 w2[i][j] = Math.random() - 0.5;
             }
@@ -174,8 +173,8 @@ public class NeuralNet implements NeuralNetInterface{
             for(int i = 0; i < inputNum + 1; i++) {
                 hiddenLayer[j] += w1[i][j] * inputLayer[i];
             }
-            // can use custom sigmoid as an activation function
-            if(datasetType) // for binary dataset
+            // for binary dataset
+            if(datasetType)
                 {hiddenLayer[j] = sigmoid(hiddenLayer[j]);}
             else // for bipolar dataset
                 {hiddenLayer[j] = customSigmoid(hiddenLayer[j]);}
@@ -185,13 +184,12 @@ public class NeuralNet implements NeuralNetInterface{
             for(int j = 0; j < hiddenNum + 1; j++) {
                 outputLayer[k] += w2[j][k] * hiddenLayer[j];
             }
-            // can use custom sigmoid as an activation function
-            if(datasetType) // for binary dataset
+            // for binary dataset
+            if(datasetType)
                 {outputLayer[k] = sigmoid(outputLayer[k]);}
             else{ // for bipolar dataset
                 outputLayer[k] = customSigmoid(outputLayer[k]);
             }
-
         }
     }
 
@@ -199,18 +197,15 @@ public class NeuralNet implements NeuralNetInterface{
      * Algorithm step 2: Perform a backward propagation & Update weights
      */
     public void backwardPropagation() {
-
         // compute the errors of output units
         for(int k = 0; k < outputNum; k++) {
             deltaOutput[k] = 0;
-            if(datasetType) // for binary dataset
-            {deltaOutput[k] = outputLayer[k] * (1 - outputLayer[k]) * singleError[k];}
+            // for binary dataset
+            if(datasetType) {deltaOutput[k] = outputLayer[k] * (1 - outputLayer[k]) * singleError[k];}
             else { // for bipolar dataset
                 deltaOutput[k] = 0.5 * (1 - Math.pow(outputLayer[k], 2)) * singleError[k];
             }
-
         }
-
         // update w2
         for(int k = 0; k < outputNum; k++) {
             for(int j = 0; j < hiddenNum + 1; j++) {
@@ -218,21 +213,18 @@ public class NeuralNet implements NeuralNetInterface{
                 w2[j][k] += deltaw2[j][k];
             }
         }
-
         // compute the errors of hidden units
         for(int j = 0; j < hiddenNum; j++) {
             deltaHidden[j] = 0;
             for(int k = 0; k < outputNum; k++) {
                 deltaHidden[j] += w2[j][k] * deltaOutput[k];
             }
-            if(datasetType) // for binary dataset
-            {deltaHidden[j] = deltaHidden[j] * hiddenLayer[j] * (1 - hiddenLayer[j]);}
+            // for binary dataset
+            if(datasetType) { deltaHidden[j] = deltaHidden[j] * hiddenLayer[j] * (1 - hiddenLayer[j]);}
             else { // for bipolar dataset
                 deltaHidden[j] = deltaHidden[j] * 0.5 * (1 - Math.pow(hiddenLayer[j], 2));
             }
-
         }
-
         // update w1
         for(int j = 0; j < hiddenNum; j++) {
             for(int i = 0; i < inputNum + 1; i++) {
