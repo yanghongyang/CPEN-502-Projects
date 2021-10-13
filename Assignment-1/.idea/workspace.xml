@@ -1,208 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c33cea12-389a-4ba8-ac6e-a8f3715678f0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1030.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1032.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1040.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1041.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1052.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1062.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1067.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1071.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1088.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1120.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1127.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1143.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1176.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1182.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1184.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1204.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1212.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1218.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1223.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1229.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1231.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1234.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1238.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1240.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1262.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1267.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1309.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1325.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1362.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1372.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1387.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1391.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1418.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1438.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1453.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1461.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1488.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1514.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1525.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1536.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1541.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1549.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1554.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1559.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1569.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1597.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1603.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1605.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1622.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1630.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1633.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1654.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1655.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1672.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1681.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1688.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1690.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1698.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1700.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1701.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1706.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1707.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1714.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1719.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1758.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1759.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1780.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1792.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1807.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1814.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1836.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1839.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1846.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1858.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1859.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1871.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1880.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1884.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1887.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1915.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1940.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1941.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1942.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1954.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1987.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-1992.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-2058.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-2189.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-2231.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-2269.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-2493.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-878.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-905.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-951.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-977.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-false-995.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2046.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2118.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2173.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2181.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2185.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2260.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2365.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2371.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2394.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2405.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2584.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2602.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2621.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2653.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2655.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2658.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2674.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2701.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2712.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2741.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2745.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2755.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2757.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2768.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2773.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2775.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2797.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2798.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2867.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2889.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2890.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2896.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2899.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2923.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2924.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2951.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2954.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2968.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2972.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-2973.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3006.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3044.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3050.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3059.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3061.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3073.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3090.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3096.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3113.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3121.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3126.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3169.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3188.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3196.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3211.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3216.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3235.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3245.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3248.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3249.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3292.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3332.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3352.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3383.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3399.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3445.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3509.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3516.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3534.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3565.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3574.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3585.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3602.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3665.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3669.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3674.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3698.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3727.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3740.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3751.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3762.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3941.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3991.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-3999.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-4010.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-4139.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-4214.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-4269.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-4312.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-4327.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-4366.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-4416.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-4431.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-4518.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-4600.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-4764.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-4977.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-5123.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error/trainTotalError-true-5569.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment-1/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment-1/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment-1/NeuralNet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment-1/NeuralNet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NeuralNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NeuralNet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainTotalError-false.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainTotalError-true.txt" beforeDir="false" />
+    <list default="true" id="c33cea12-389a-4ba8-ac6e-a8f3715678f0" name="Default Changelist" comment="Record all the total error files in .txt format. Change some annotations.">
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -242,7 +43,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="D:/robocode/libs/roborumble.jar" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.44844124" />
@@ -276,6 +79,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1633855579312</updated>
+      <workItem from="1634071420329" duration="2393000" />
     </task>
     <task id="LOCAL-00001" summary="Update assignment-1(Not complete the backward propagation algo)">
       <created>1633859845660</created>
@@ -356,6 +160,9 @@
     </task>
     <option name="localTasksCounter" value="12" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
