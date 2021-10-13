@@ -55,6 +55,7 @@ if __name__ == '__main__':
     # plt.plot(X_binary_max, Y_binary_max, color = 'red', label = 'maximum_epoch_binary')
     plt.legend(loc = 1)
     plt.title("(1) - a): \n standard backpropagation of XOR problem using a binary representation")
+    plt.savefig(path + '/binary_without_momentum.png')
     plt.figure(figsize=(6, 8))
     plt.show()
 
@@ -70,6 +71,7 @@ if __name__ == '__main__':
     plt.plot(X_bipolar, Y_bipolar, color = 'red', label = 'bipolar representation')
     plt.legend(loc = 1)
     plt.title("(1) - b): \n standard backpropagation of XOR problem using a bipolar representation")
+    plt.savefig(path + '/bipolar_without_momentum.png')
     plt.figure(figsize=(6, 8))
     plt.show()
 
@@ -101,6 +103,7 @@ if __name__ == '__main__':
     plt.plot(X_binary_momentum, Y_binary_momentum, color='blue', label='binary representation(momentum)')
     plt.legend(loc=1)
     plt.title("(1) - c): backpropagation with momentum = 0.9 of \n XOR problem using binary representation")
+    plt.savefig(path + '/binary_with_momentum.png')
     plt.figure(figsize=(6, 8))
     plt.show()
 
@@ -111,5 +114,6 @@ if __name__ == '__main__':
     plt.plot(X_bipolar_momentum, Y_bipolar_momentum, color='red', label='bipolar representation(momentum)')
     plt.legend(loc = 1)
     plt.title("(1) - c): backpropagation with momentum = 0.9 of \n XOR problem using bipolar representation")
+    plt.savefig(path + '/bipolar_with_momentum.png')
     plt.figure(figsize=(6, 8))
     plt.show()
