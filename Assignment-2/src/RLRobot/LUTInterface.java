@@ -1,3 +1,7 @@
+package RLRobot;
+
+import RLRobot.CommonInterface;
+
 public interface LUTInterface extends CommonInterface {
 
     /**
@@ -7,7 +11,7 @@ public interface LUTInterface extends CommonInterface {
      * @param argVariableCeiling An array specifying the highest value of each of the variables in the input vector.
      * The ordr must match the order as reffered to in argVariableFloor.
      */
-/*    public LUT (
+/*    public LookUpTable (
             int argNumInputs,
             int [] argVariableFloor,
             int [] argVariableCeiling
@@ -21,10 +25,10 @@ public interface LUTInterface extends CommonInterface {
     /**
      * A helper method that translates a vector being used to index the look up table
      * into an ordinal that can then be used to access the associated look up table element
-     * @param X The state action vector used to index the LUT
+     * @param X The state action vector used to index the LookUpTable
      * @return The index where this vector maps to
      */
-    public int indexFor(double [] X);
+    //public int indexFor(double [] X);
 
 
 }
