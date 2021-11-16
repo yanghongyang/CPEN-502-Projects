@@ -4,6 +4,8 @@ import robocode.*;
 import robocode.Robot;
 
 import java.awt.*;
+import java.io.IOException;
+import java.io.PrintStream;
 
 public class IRobot extends AdvancedRobot {
 
@@ -11,6 +13,7 @@ public class IRobot extends AdvancedRobot {
     public enum HP {low, medium, high};
     public enum Distance {close, medium, far};
     public enum Action {fire, forwardLeft, forwardRight, backwardLeft, backwardRight, forward, backward, left, right};
+    public enum operaMode {onScan, onAction};
 
     // Initialization: Current State
     private HP curMyHP = HP.high;
@@ -25,6 +28,9 @@ public class IRobot extends AdvancedRobot {
     private Distance preMyDistance = Distance.close;
     private Distance preWaDistance = Distance.far;
     private Action preAction = Action.forward;
+
+    // Initialization: operationMode
+    private operaMode myOperationMode= operaMode.onScan;
 
     // My X position
     public double myX = 0.0;
@@ -63,6 +69,12 @@ public class IRobot extends AdvancedRobot {
     // Whether take greedy method
     public static int curActionIndex;
     public static double enemyBearing;
+
+    // static numbers for winning rounds
+    public static int totalRound = 0;
+    public static int round = 0;
+    public static int winRound = 0;
+    public static double[] winPercentage;
 
     public LookUpTable lut = new LookUpTable(HP.values().length,
             HP.values().length,
@@ -172,77 +184,96 @@ public class IRobot extends AdvancedRobot {
         setRadarColor(Color.white);
         curMyHP = HP.high;
 
-        while(true) {
+        while (true) {
+            switch (myOperationMode) {
+                case onScan: {
+                    reward = 0.0;
+                    turnRadarLeft(180);
+                    break;
+                }
+                case onAction: {
+                    curMyDistance = getDistanceFromWallLevel(myX, myY);
 
-            curMyDistance = getDistanceFromWallLevel(myX, myY);
+                    curActionIndex = (Math.random() <= epsilon)
+                            ? lut.getRandomAction() // explore a random action
+                            : lut.getBestAction(
+                            getHPLevel(myHP).ordinal(),
+                            getHPLevel(enemyHP).ordinal(),
+                            getDistanceLevel(dis).ordinal(),
+                            curMyDistance.ordinal()); // select greedy action
 
-            curActionIndex = (Math.random() <= epsilon)
-                    ? lut.getRandomAction() // explore a random action
-                    : lut.getBestAction(
-                    getHPLevel(myHP).ordinal(),
-                    getHPLevel(enemyHP).ordinal(),
-                    getDistanceLevel(dis).ordinal(),
-                    curMyDistance.ordinal()); // select greedy action
+                    System.out.println(curActionIndex);
+                    curAction = Action.values()[curActionIndex];
+                    turnLeft(90);
+                    switch (curAction) {
+                        case fire: {
+                            ///turnGunRight(getHeading() - getGunHeading() + enemyBearing);
+                            fire(3);
+                            break;
+                        }
 
-            System.out.println(curActionIndex);
-            curAction = Action.values()[curActionIndex];
-            turnLeft(90);
-            switch(curAction) {
-                case fire: {
-                    ///turnGunRight(getHeading() - getGunHeading() + enemyBearing);
-                    fire(3);
-                    break;
+                        case forward: {
+                            setAhead(100);
+                            execute();
+                            break;
+                        }
+                        case backward: {
+                            setBack(100);
+                            execute();
+                            break;
+                        }
+
+                        case left: {
+                            setTurnLeft(30);
+                            execute();
+                            break;
+                        }
+
+                        case right: {
+                            setTurnRight(30);
+                            execute();
+                            break;
+                        }
+                        //forwardLeft, forwardRight, backwardLeft, backwardRight
+                        case forwardLeft: {
+                            setTurnLeft(30);
+                            setAhead(100);
+                            execute();
+                            break;
+                        }
+                        case forwardRight: {
+                            setTurnRight(30);
+                            setAhead(100);
+                            execute();
+                            break;
+                        }
+
+                        case backwardLeft: {
+                            setTurnLeft(30);
+                            setBack(100);
+                            execute();
+                            break;
+                        }
+
+                        case backwardRight: {
+                            setTurnRight(30);
+                            setBack(100);
+                            execute();
+                            break;
+                        }
+                    }
+                    int[] indexes = new int[]{
+                            preMyHP.ordinal(),
+                            preEneHP.ordinal(),
+                            preMyDistance.ordinal(),
+                            preWaDistance.ordinal(),
+                            preAction.ordinal()
+                    };
+                    Q = calQ(reward, onPolicy);
+                    lut.setQValue(indexes, Q);
+                    myOperationMode = operaMode.onScan;
                 }
 
-                case forward: {
-                    setAhead(100);
-                    execute();
-                    break;
-                }
-                case backward: {
-                    setBack(100);
-                    execute();
-                    break;
-                }
-
-                case left: {
-                    setTurnLeft(30);
-                    execute();
-                    break;
-                }
-
-                case right: {
-                    setTurnRight(30);
-                    execute();
-                    break;
-                }
-                //forwardLeft, forwardRight, backwardLeft, backwardRight
-                case forwardLeft: {
-                    setTurnLeft(30);
-                    setAhead(100);
-                    execute();
-                    break;
-                }
-                case forwardRight: {
-                    setTurnRight(30);
-                    setAhead(100);
-                    execute();
-                    break;
-                }
-
-                case backwardLeft: {
-                    setTurnLeft(30);
-                    setBack(100);
-                    execute();
-                    break;
-                }
-
-                case backwardRight: {
-                    setTurnRight(30);
-                    setBack(100);
-                    execute();
-                    break;
-                }
             }
         }
     }
@@ -329,7 +360,12 @@ public class IRobot extends AdvancedRobot {
                 preAction.ordinal()};
         Q = calQ(reward, onPolicy);
         lut.setQValue(indexes, Q);
-
+        winRound++;
+        totalRound++;
+        if((totalRound % 20 == 0) && (totalRound != 0)){
+            winPercentage[round++] = (double) winRound / 20;
+            saveWinPercentage();
+        }
     }
 
     @Override
@@ -345,7 +381,11 @@ public class IRobot extends AdvancedRobot {
                 preAction.ordinal()};
         Q = calQ(reward, onPolicy);
         lut.setQValue(indexes, Q);
-
+        totalRound++;
+        if((totalRound % 20 == 0) && (totalRound != 0)){
+            winPercentage[round++] = (double) winRound / 20;
+            saveWinPercentage();
+        }
     }
     public void saveTable() {
         try {
@@ -358,6 +398,25 @@ public class IRobot extends AdvancedRobot {
     public void loadTable() {
         try {
             lut.load("lut.dat");
+        } catch (Exception e) {
+            System.out.println("Save Error!" + e);
+        }
+    }
+    public void saveWinPercentage() {
+        try {
+            PrintStream saveFile = null;
+
+            try {
+                saveFile = new PrintStream(new RobocodeFileOutputStream(getDataFile("winningPercentage.dat")));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            for (int i = 0; i < winPercentage.length; i++) {
+                String s = String.format("%d,%f", round, winPercentage[i]);
+                assert saveFile != null;
+                saveFile.println(s);
+            }
         } catch (Exception e) {
             System.out.println("Save Error!" + e);
         }
