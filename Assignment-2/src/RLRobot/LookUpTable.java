@@ -32,7 +32,7 @@ public class LookUpTable implements LUTInterface{
                 for(int k = 0; k < distance; k++) {
                     for(int m = 0; m < distanceWall; m++) {
                         for(int n = 0; n < actionSize; n++) {
-                            LUT[i][j][k][m][n] = 0;
+                            LUT[i][j][k][m][n] = Math.random();
                         }
                     }
                 }
