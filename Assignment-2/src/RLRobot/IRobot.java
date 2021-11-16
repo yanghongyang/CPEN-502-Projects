@@ -184,11 +184,12 @@ public class IRobot extends AdvancedRobot {
                     getDistanceLevel(dis).ordinal(),
                     curMyDistance.ordinal()); // select greedy action
 
+            System.out.println(curActionIndex);
             curAction = Action.values()[curActionIndex];
-
+            turnLeft(90);
             switch(curAction) {
                 case fire: {
-                    turnGunRight(getHeading() - getGunHeading() + enemyBearing);
+                    ///turnGunRight(getHeading() - getGunHeading() + enemyBearing);
                     fire(3);
                     break;
                 }
@@ -289,22 +290,30 @@ public class IRobot extends AdvancedRobot {
 
     @Override
     public void onHitByBullet(HitByBulletEvent e){
-        if(takeImmediate) reward += immediatePenalty;
+        if(takeImmediate) {
+            reward += immediatePenalty;
+        }
     }
 
     @Override
     public void onBulletHit(BulletHitEvent e){
-        if(takeImmediate) reward += immediateBonus;
+        if(takeImmediate) {
+            reward += immediateBonus;
+        }
     }
 
     @Override
     public void onBulletMissed(BulletMissedEvent e){
-        if(takeImmediate) reward += immediatePenalty;
+        if(takeImmediate) {
+            reward += immediatePenalty;
+        }
     }
 
     @Override
     public void onHitWall(HitWallEvent e){
-        if(takeImmediate) reward += immediatePenalty;
+        if(takeImmediate) {
+            reward += immediatePenalty;
+        }
     }
 
     @Override
