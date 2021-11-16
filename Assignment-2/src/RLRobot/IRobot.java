@@ -1,8 +1,9 @@
 package RLRobot;
 
-import robocode.AdvancedRobot;
+import robocode.*;
 import robocode.Robot;
-import robocode.ScannedRobotEvent;
+
+import java.awt.*;
 
 public class IRobot extends AdvancedRobot {
 
@@ -14,8 +15,8 @@ public class IRobot extends AdvancedRobot {
     // Initialization: Current State
     private HP curMyHP = HP.high;
     private HP curEneHP = HP.high;
-    private Distance curMyDistance = Distance.close;
-    private Distance curWaDistance = Distance.far;
+    private Distance curMyDistance = Distance.close; // distance between myRobot and the enemy
+    private Distance curWaDistance = Distance.far; // distance between myRobot and the wall
     private Action curAction = Action.forward;
 
     // Initialization: Previous State
@@ -58,7 +59,11 @@ public class IRobot extends AdvancedRobot {
     private final double terminalBonus = 3.0;
     private final double immediatePenalty = -2.0;
     private final double terminalPenalty = -3.0;
-    
+
+    // Whether take greedy method
+    public static int curActionIndex;
+    public static double enemyBearing;
+
     public LookUpTable lut = new LookUpTable(HP.values().length,
             HP.values().length,
             Distance.values().length,
@@ -160,16 +165,92 @@ public class IRobot extends AdvancedRobot {
     @Override
     public void run() {
         super.run();
+        /* Customize the robot tank */
+        setBulletColor(Color.red);
+        setGunColor(Color.darkGray);
+        setBodyColor(Color.blue);
+        setRadarColor(Color.white);
+        curMyHP = HP.high;
 
         while(true) {
 
+            curMyDistance = getDistanceFromWallLevel(myX, myY);
+
+            curActionIndex = (Math.random() <= epsilon)
+                    ? lut.getRandomAction() // explore a random action
+                    : lut.getBestAction(
+                    getHPLevel(myHP).ordinal(),
+                    getHPLevel(enemyHP).ordinal(),
+                    getDistanceLevel(dis).ordinal(),
+                    curMyDistance.ordinal()); // select greedy action
+
+            curAction = Action.values()[curActionIndex];
+
+            switch(curAction) {
+                case fire: {
+                    turnGunRight(getHeading() - getGunHeading() + enemyBearing);
+                    fire(3);
+                    break;
+                }
+
+                case forward: {
+                    setAhead(100);
+                    execute();
+                    break;
+                }
+                case backward: {
+                    setBack(100);
+                    execute();
+                    break;
+                }
+
+                case left: {
+                    setTurnLeft(30);
+                    execute();
+                    break;
+                }
+
+                case right: {
+                    setTurnRight(30);
+                    execute();
+                    break;
+                }
+                //forwardLeft, forwardRight, backwardLeft, backwardRight
+                case forwardLeft: {
+                    setTurnLeft(30);
+                    setAhead(100);
+                    execute();
+                    break;
+                }
+                case forwardRight: {
+                    setTurnRight(30);
+                    setAhead(100);
+                    execute();
+                    break;
+                }
+
+                case backwardLeft: {
+                    setTurnLeft(30);
+                    setBack(100);
+                    execute();
+                    break;
+                }
+
+                case backwardRight: {
+                    setTurnRight(30);
+                    setBack(100);
+                    execute();
+                    break;
+                }
+            }
         }
     }
 
     @Override
     public void onScannedRobot(ScannedRobotEvent e) {
         super.onScannedRobot(e);
-        setTurnRight(e.getBearing());
+        enemyBearing = e.getBearing();
+        setTurnRight(enemyBearing);
 
         // if we've turned toward our enemy...
         if (Math.abs(getTurnRemaining()) < 10) {
@@ -185,7 +266,7 @@ public class IRobot extends AdvancedRobot {
         }
 
         // lock our radar onto our target
-        setTurnRadarRight(getHeading() - getRadarHeading() + e.getBearing());
+        setTurnRadarRight(getHeading() - getRadarHeading() + enemyBearing);
 
         myX = getX();
         myY = getY();
@@ -204,5 +285,72 @@ public class IRobot extends AdvancedRobot {
         curMyDistance = getDistanceLevel(dis);
         curWaDistance = getDistanceFromWallLevel(myX, myY);
 
+    }
+
+    @Override
+    public void onHitByBullet(HitByBulletEvent e){
+        if(takeImmediate) reward += immediatePenalty;
+    }
+
+    @Override
+    public void onBulletHit(BulletHitEvent e){
+        if(takeImmediate) reward += immediateBonus;
+    }
+
+    @Override
+    public void onBulletMissed(BulletMissedEvent e){
+        if(takeImmediate) reward += immediatePenalty;
+    }
+
+    @Override
+    public void onHitWall(HitWallEvent e){
+        if(takeImmediate) reward += immediatePenalty;
+    }
+
+    @Override
+    public void onWin(WinEvent e){
+        saveTable();
+        reward = terminalBonus;
+        // why int instead double?
+        int[] indexes = new int []{
+                preMyHP.ordinal(),
+                preEneHP.ordinal(),
+                preMyDistance.ordinal(),
+                preWaDistance.ordinal(),
+                preAction.ordinal()};
+        Q = calQ(reward, onPolicy);
+        lut.setQValue(indexes, Q);
+
+    }
+
+    @Override
+    public void onDeath(DeathEvent e){
+        saveTable();
+        reward = terminalPenalty;
+        // why int instead of double?
+        int[] indexes = new int []{
+                preMyHP.ordinal(),
+                preEneHP.ordinal(),
+                preMyDistance.ordinal(),
+                preWaDistance.ordinal(),
+                preAction.ordinal()};
+        Q = calQ(reward, onPolicy);
+        lut.setQValue(indexes, Q);
+
+    }
+    public void saveTable() {
+        try {
+            lut.save(getDataFile("lut.dat"));
+        } catch (Exception e) {
+            System.out.println("Save Error!" + e);
+        }
+    }
+
+    public void loadTable() {
+        try {
+            lut.load("lut.dat");
+        } catch (Exception e) {
+            System.out.println("Save Error!" + e);
+        }
     }
 }
