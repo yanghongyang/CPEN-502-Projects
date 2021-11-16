@@ -1,8 +1,6 @@
 package RLRobot;
 
-import RLRobot.CommonInterface;
-
-public interface LUTInterface extends CommonInterface {
+public interface LUTInterface {
 
     /**
      * Constructor. You will need to define one in your implementation

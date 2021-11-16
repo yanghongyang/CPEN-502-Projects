@@ -22,7 +22,7 @@ public class LookUpTable implements LUTInterface{
         this.distanceWall = distanceWall;
         this.actionSize = action;
         LUT = new double[myHP][enemyHP][distance][distanceWall][action];
-        this.initialiseLUT();
+        initialiseLUT();
     }
 
     @Override
@@ -46,7 +46,7 @@ public class LookUpTable implements LUTInterface{
     }
 
     public int getBestAction(int myHP, int enemyHP, int distance, int distanceWall) {
-        double maxQ = Double.MIN_VALUE;
+        double maxQ = -1;
         int actionIndex = -1;
 
         for(int i = 0; i < actionSize; i++) {
@@ -66,7 +66,6 @@ public class LookUpTable implements LUTInterface{
         LUT[x[0]][x[1]][x[2]][x[3]][x[4]] = argValue;
     }
 
-    @Override
     public void save(File argFile) {
         PrintStream saveFile = null;
 
@@ -91,7 +90,6 @@ public class LookUpTable implements LUTInterface{
         saveFile.close();
     }
 
-    @Override
     public void load(String argFileName) throws IOException {
         try {
             BufferedReader in = new BufferedReader(new FileReader(argFileName));
@@ -116,12 +114,10 @@ public class LookUpTable implements LUTInterface{
         }
     }
 
-    @Override
     public double outputFor(double[] X) {
         return 0;
     }
 
-    @Override
     public double train(double[] X, double argValue) {
         return 0;
     }
