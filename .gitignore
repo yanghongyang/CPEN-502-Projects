@@ -3,3 +3,8 @@ config/
 robots/
 .idea/
 CPEN-502-Projects.iml
+
+Assignment-2/.idea/
+Assignment-2/config/
+Assignment-2/out/
+Assignment-2/Assignment-2.iml
