@@ -116,7 +116,7 @@ public class LookUpTable implements LUTInterface{
             }
             in.close();
         } catch (IOException e) {
-//            e.printStackTrace();
+            e.printStackTrace();
         }
     }
     public int visit(double[] x) throws ArrayIndexOutOfBoundsException {

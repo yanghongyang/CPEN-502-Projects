@@ -81,7 +81,8 @@ public class IRobot extends AdvancedRobot {
     public static int winRound = 0;
 //    public static double[] winPercentage = new double[351];
     public static double winPercentage = 0.0;
-    private final String fileToSaveName = "winningRate";
+    public static String fileToSaveName = IRobot.class.getSimpleName() + "-"  + "winningRate"+ ".log";
+    static LogFile log = new LogFile();
 
     public static LookUpTable lut = new LookUpTable(HP.values().length,
             HP.values().length,
@@ -90,7 +91,7 @@ public class IRobot extends AdvancedRobot {
             Action.values().length);
 
     // save the winPercentage
-    static RLRobot.LogFile log = new RLRobot.LogFile();
+//    static RLRobot.LogFile log = new RLRobot.LogFile();
 
     // Get the level of HP
     public HP getHPLevel(double hp) {
@@ -214,7 +215,7 @@ public class IRobot extends AdvancedRobot {
                             getDistanceLevel(dis).ordinal(),
                             curMyDistance.ordinal()); // select greedy action
 
-                    // System.out.println(curActionIndex);
+//                     System.out.println(curActionIndex);
                     curAction = Action.values()[curActionIndex];
 //                    turnLeft(90);
                     switch (curAction) {
@@ -388,7 +389,7 @@ public class IRobot extends AdvancedRobot {
                 preAction.ordinal()};
         Q = calQ(reward, onPolicy);
         lut.setQValue(indexes, Q);
-        saveTable();
+//        saveTable();
         winRound++;
         totalRound++;
         if((totalRound % 20 == 0) && (totalRound != 0)){
@@ -416,7 +417,7 @@ public class IRobot extends AdvancedRobot {
                 preAction.ordinal()};
         Q = calQ(reward, onPolicy);
         lut.setQValue(indexes, Q);
-        saveTable();
+//        saveTable();
         totalRound++;
         if((totalRound % 20 == 0) && (totalRound != 0)){
             winPercentage = (double) winRound / 20;
@@ -433,7 +434,7 @@ public class IRobot extends AdvancedRobot {
         try {
             lut.save(getDataFile("lut.dat"));
         } catch (Exception e) {
-//            System.out.println("Save Error!" + e);
+            System.out.println("Save Error!" + e);
         }
     }
 
@@ -441,7 +442,7 @@ public class IRobot extends AdvancedRobot {
         try {
             lut.load("lut.dat");
         } catch (Exception e) {
-//            System.out.println("Save Error!" + e);
+            System.out.println("Save Error!" + e);
         }
     }
 //    public void saveWinPercentage() {
