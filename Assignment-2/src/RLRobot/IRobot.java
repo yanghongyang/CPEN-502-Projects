@@ -79,7 +79,7 @@ public class IRobot extends AdvancedRobot {
     public static int totalRound = 0;
     public static int round = 0;
     public static int winRound = 0;
-    public static double[] winPercentage;
+    public static double[] winPercentage = new double[351];
 
     public static LookUpTable lut = new LookUpTable(HP.values().length,
             HP.values().length,
