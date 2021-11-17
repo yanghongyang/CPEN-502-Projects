@@ -430,20 +430,10 @@ public class IRobot extends AdvancedRobot {
     }
     public void saveWinPercentage() {
         try {
-            PrintStream saveFile = null;
-
-            try {
-                saveFile = new PrintStream(new RobocodeFileOutputStream(getDataFile("winningPercentage.dat")));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            for (int i = 0; i < winPercentage.length; i++) {
-                String s = String.format("%d,%f", round, winPercentage[i]);
-                assert saveFile != null;
-                saveFile.println(s);
-            }
-            saveFile.close();
+            FileWriter fileWriter = new FileWriter("winningrate.txt");
+            String s = String.format("%d, %.5f", round, winPercentage[round]);
+            fileWriter.write(s + "\n");
+            fileWriter.close();
         } catch (Exception e) {
             System.out.println("Save Error!" + e);
         }
