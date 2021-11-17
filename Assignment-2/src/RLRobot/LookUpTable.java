@@ -78,7 +78,7 @@ public class LookUpTable implements LUTInterface{
         try {
             saveFile = new PrintStream(new RobocodeFileOutputStream(argFile));
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
 
         for(int i = 0; i < myHP; i++) {
@@ -116,7 +116,7 @@ public class LookUpTable implements LUTInterface{
             }
             in.close();
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
     public int visit(double[] x) throws ArrayIndexOutOfBoundsException {

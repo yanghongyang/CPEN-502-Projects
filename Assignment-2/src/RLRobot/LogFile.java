@@ -11,7 +11,7 @@ public class LogFile {
             fileWriter.close();
         }
         catch(Exception e){
-            System.out.println(e);
+//            System.out.println(e);
         }
     }
 }

@@ -214,7 +214,7 @@ public class IRobot extends AdvancedRobot {
                             getDistanceLevel(dis).ordinal(),
                             curMyDistance.ordinal()); // select greedy action
 
-                    System.out.println(curActionIndex);
+                    // System.out.println(curActionIndex);
                     curAction = Action.values()[curActionIndex];
 //                    turnLeft(90);
                     switch (curAction) {
@@ -395,6 +395,7 @@ public class IRobot extends AdvancedRobot {
 //            winPercentage[round++] = (double) winRound / 20;
             winPercentage = (double) winRound / 20;
             // writeToFile(File fileToWrite, double winRate, int roundCount)
+            System.out.println(String.format("%d, %.5f",++round, winPercentage));
             File folderDst1 = getDataFile(fileToSaveName);
             log.writeToFile(folderDst1, winPercentage, round);
             winRound = 0;
@@ -420,6 +421,7 @@ public class IRobot extends AdvancedRobot {
         if((totalRound % 20 == 0) && (totalRound != 0)){
             winPercentage = (double) winRound / 20;
             // writeToFile(File fileToWrite, double winRate, int roundCount)
+            System.out.println(String.format("%d, %.5f",++round, winPercentage));
             File folderDst1 = getDataFile(fileToSaveName);
             log.writeToFile(folderDst1, winPercentage, round);
 //            saveWinPercentage();
@@ -431,7 +433,7 @@ public class IRobot extends AdvancedRobot {
         try {
             lut.save(getDataFile("lut.dat"));
         } catch (Exception e) {
-            System.out.println("Save Error!" + e);
+//            System.out.println("Save Error!" + e);
         }
     }
 
@@ -439,7 +441,7 @@ public class IRobot extends AdvancedRobot {
         try {
             lut.load("lut.dat");
         } catch (Exception e) {
-            System.out.println("Save Error!" + e);
+//            System.out.println("Save Error!" + e);
         }
     }
 //    public void saveWinPercentage() {
