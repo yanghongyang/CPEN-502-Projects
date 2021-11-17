@@ -18,6 +18,6 @@ if __name__ == '__main__':
     plt.ylabel('Winning rate')
     plt.title('2-a)')
     plt.show()
-
+    plt.savefig("E:/2-a.png")
 
 
