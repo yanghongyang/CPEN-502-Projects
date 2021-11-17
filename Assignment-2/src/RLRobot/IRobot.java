@@ -2,7 +2,7 @@ package RLRobot;
 
 import robocode.*;
 import robocode.Robot;
-
+import sun.rmi.log.ReliableLog;
 import java.awt.*;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -79,7 +79,9 @@ public class IRobot extends AdvancedRobot {
     public static int totalRound = 0;
     public static int round = 0;
     public static int winRound = 0;
-    public static double[] winPercentage = new double[351];
+//    public static double[] winPercentage = new double[351];
+    public static double winPercentage = 0.0;
+    private final String fileToSaveName = "winningRate";
 
     public static LookUpTable lut = new LookUpTable(HP.values().length,
             HP.values().length,
@@ -87,6 +89,8 @@ public class IRobot extends AdvancedRobot {
             Distance.values().length,
             Action.values().length);
 
+    // save the winPercentage
+    static RLRobot.LogFile log = new RLRobot.LogFile();
 
     // Get the level of HP
     public HP getHPLevel(double hp) {
@@ -189,6 +193,8 @@ public class IRobot extends AdvancedRobot {
         setBodyColor(Color.blue);
         setRadarColor(Color.white);
         curMyHP = HP.high;
+
+
 
         while (true) {
             switch (myOperationMode) {
@@ -386,10 +392,14 @@ public class IRobot extends AdvancedRobot {
         winRound++;
         totalRound++;
         if((totalRound % 20 == 0) && (totalRound != 0)){
-            winPercentage[round++] = (double) winRound / 20;
-            saveWinPercentage();
+//            winPercentage[round++] = (double) winRound / 20;
+            winPercentage = (double) winRound / 20;
+            // writeToFile(File fileToWrite, double winRate, int roundCount)
+            File folderDst1 = getDataFile(fileToSaveName);
+            log.writeToFile(folderDst1, winPercentage, round);
             winRound = 0;
         }
+
     }
 
     @Override
@@ -408,10 +418,14 @@ public class IRobot extends AdvancedRobot {
         saveTable();
         totalRound++;
         if((totalRound % 20 == 0) && (totalRound != 0)){
-            winPercentage[round++] = (double) winRound / 20;
-            saveWinPercentage();
+            winPercentage = (double) winRound / 20;
+            // writeToFile(File fileToWrite, double winRate, int roundCount)
+            File folderDst1 = getDataFile(fileToSaveName);
+            log.writeToFile(folderDst1, winPercentage, round);
+//            saveWinPercentage();
             winRound = 0;
         }
+
     }
     public void saveTable() {
         try {
@@ -428,14 +442,14 @@ public class IRobot extends AdvancedRobot {
             System.out.println("Save Error!" + e);
         }
     }
-    public void saveWinPercentage() {
-        try {
-            FileWriter fileWriter = new FileWriter("winningrate.txt");
-            String s = String.format("%d, %.5f", round, winPercentage[round]);
-            fileWriter.write(s + "\n");
-            fileWriter.close();
-        } catch (Exception e) {
-            System.out.println("Save Error!" + e);
-        }
-    }
+//    public void saveWinPercentage() {
+//        try {
+//            FileWriter fileWriter = new FileWriter("winningrate.txt");
+//            String s = String.format("%d, %.5f", round, winPercentage[round]);
+//            fileWriter.write(s + "\n");
+//            fileWriter.close();
+//        } catch (Exception e) {
+//            System.out.println("Save Error!" + e);
+//        }
+//    }
 }
