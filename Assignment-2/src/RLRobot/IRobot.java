@@ -84,12 +84,13 @@ public class IRobot extends AdvancedRobot {
 //    public static double[] winPercentage = new double[351];
     public static double winPercentage = 0.0;
     static LocalDateTime myDateObj = LocalDateTime.now();
-    static DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("HH-mm-ss");
+    static DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("HH:mm:ss");
     static String formattedDate = myDateObj.format(myFormatObj);
     // on-policy/off-policy; terminal/intermedia; epsilon;
     static String policy = onPolicy? "onPolicy":"offPolicy";
     static String whetherImmediate = takeImmediate? "immediate":"terminal";
-    public static String fileToSaveName = IRobot.class.getSimpleName() + "-" + formattedDate + "-" + policy + "-" + whetherImmediate + "-" + immediateBonus + "-" + terminalBonus + "-" + immediatePenalty + "-" + terminalPenalty + "-" + epsilon + "-winningRate"+ ".log";
+    public static String fileToSave = String.join("-", IRobot.class.getSimpleName(), formattedDate, policy, whetherImmediate, Double.toString(immediateBonus), Double.toString(terminalBonus), Double.toString(immediatePenalty), Double.toString(terminalPenalty), Double.toString(epsilon), "winningRate");
+    public static String fileToSaveName = fileToSave + ".log";
     public static String fileToSaveLUT = IRobot.class.getSimpleName() + "-" + formattedDate + "-" + "LUT";
     static LogFile log = new LogFile();
 
