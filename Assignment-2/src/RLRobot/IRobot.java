@@ -68,8 +68,8 @@ public class IRobot extends AdvancedRobot {
     /* Bonus and Penalty */
     private final double immediateBonus = 2.0;
     private final double terminalBonus = 3.0;
-    private final double immediatePenalty = -0.5;
-    private final double terminalPenalty = -3.0;
+    private final double immediatePenalty = -0.1;
+    private final double terminalPenalty = -0.2;
 
     // Whether take greedy method
     public static int curActionIndex;
@@ -352,20 +352,21 @@ public class IRobot extends AdvancedRobot {
 
     @Override
     public void onHitWall(HitWallEvent e){
-        super.onHitWall(e);
         if(takeImmediate) {
             reward += immediatePenalty;
         }
         avidObstacle();
     }
     public void avidObstacle() {
-        setBack(100);
-        setTurnRight(30);
+        setBack(200);
+        setTurnRight(60);
         execute();
     }
     @Override
     public void onHitRobot(HitRobotEvent e) {
-        super.onHitRobot(e);
+        if(takeImmediate) {
+            reward += immediatePenalty;
+        }
         avidObstacle();
     }
     @Override
@@ -387,6 +388,7 @@ public class IRobot extends AdvancedRobot {
         if((totalRound % 20 == 0) && (totalRound != 0)){
             winPercentage[round++] = (double) winRound / 20;
             saveWinPercentage();
+            winRound = 0;
         }
     }
 
@@ -408,6 +410,7 @@ public class IRobot extends AdvancedRobot {
         if((totalRound % 20 == 0) && (totalRound != 0)){
             winPercentage[round++] = (double) winRound / 20;
             saveWinPercentage();
+            winRound = 0;
         }
     }
     public void saveTable() {
@@ -440,6 +443,7 @@ public class IRobot extends AdvancedRobot {
                 assert saveFile != null;
                 saveFile.println(s);
             }
+            saveFile.close();
         } catch (Exception e) {
             System.out.println("Save Error!" + e);
         }
