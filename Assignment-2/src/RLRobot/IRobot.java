@@ -6,13 +6,18 @@ import robocode.Robot;
 import java.awt.*;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class IRobot extends AdvancedRobot {
 
     //Enum type
     public enum HP {low, medium, high};
     public enum Distance {close, medium, far};
-    public enum Action {fire, forwardLeft, forwardRight, backwardLeft, backwardRight, forward, backward, left, right};
+    public enum Action {fire, forwardLeft, forwardRight, backwardLeft, backwardRight, left, right, trackEnemy, escapeEnemy};
     public enum operaMode {onScan, onAction};
 
     // Initialization: Current State
@@ -20,14 +25,14 @@ public class IRobot extends AdvancedRobot {
     private HP curEneHP = HP.high;
     private Distance curMyDistance = Distance.close; // distance between myRobot and the enemy
     private Distance curWaDistance = Distance.far; // distance between myRobot and the wall
-    private Action curAction = Action.forward;
+    private Action curAction = Action.trackEnemy;
 
     // Initialization: Previous State
     private HP preMyHP = HP.high;
     private HP preEneHP = HP.high;
     private Distance preMyDistance = Distance.close;
     private Distance preWaDistance = Distance.far;
-    private Action preAction = Action.forward;
+    private Action preAction = Action.trackEnemy;
 
     // Initialization: operationMode
     private operaMode myOperationMode= operaMode.onScan;
@@ -44,15 +49,15 @@ public class IRobot extends AdvancedRobot {
     public double dis = 0.0;
 
     // Whether take immediate rewards
-    public static boolean takeImmediate = false;
+    public static boolean takeImmediate = true;
 
     // Whether take on-policy algorithm
     public static boolean onPolicy = false;
     
     // Discount factor
-    private double gamma = 0.1; 
+    private double gamma = 0.9;
     // Learning rate
-    private double alpha = 0.1;
+    private double alpha = 0.7;
     // Random number for epsilon-greedy policy
     private double epsilon = 0.0;
     // Q
@@ -63,7 +68,7 @@ public class IRobot extends AdvancedRobot {
     /* Bonus and Penalty */
     private final double immediateBonus = 2.0;
     private final double terminalBonus = 3.0;
-    private final double immediatePenalty = -2.0;
+    private final double immediatePenalty = -0.5;
     private final double terminalPenalty = -3.0;
 
     // Whether take greedy method
@@ -76,11 +81,12 @@ public class IRobot extends AdvancedRobot {
     public static int winRound = 0;
     public static double[] winPercentage;
 
-    public LookUpTable lut = new LookUpTable(HP.values().length,
+    public static LookUpTable lut = new LookUpTable(HP.values().length,
             HP.values().length,
             Distance.values().length,
             Distance.values().length,
             Action.values().length);
+
 
     // Get the level of HP
     public HP getHPLevel(double hp) {
@@ -188,7 +194,7 @@ public class IRobot extends AdvancedRobot {
             switch (myOperationMode) {
                 case onScan: {
                     reward = 0.0;
-                    turnRadarLeft(180);
+                    turnRadarLeft(90);
                     break;
                 }
                 case onAction: {
@@ -204,21 +210,24 @@ public class IRobot extends AdvancedRobot {
 
                     System.out.println(curActionIndex);
                     curAction = Action.values()[curActionIndex];
-                    turnLeft(90);
+//                    turnLeft(90);
                     switch (curAction) {
                         case fire: {
-                            ///turnGunRight(getHeading() - getGunHeading() + enemyBearing);
+                            turnGunRight(getHeading() - getGunHeading() + enemyBearing);
                             fire(3);
                             break;
                         }
 
-                        case forward: {
+                        case trackEnemy: {
+                            setTurnRight(enemyBearing);
                             setAhead(100);
                             execute();
                             break;
                         }
-                        case backward: {
-                            setBack(100);
+
+                        case escapeEnemy: {
+                            setTurnRight(enemyBearing + 180);
+                            setAhead(100);
                             execute();
                             break;
                         }
@@ -282,23 +291,23 @@ public class IRobot extends AdvancedRobot {
     public void onScannedRobot(ScannedRobotEvent e) {
         super.onScannedRobot(e);
         enemyBearing = e.getBearing();
-        setTurnRight(enemyBearing);
-
-        // if we've turned toward our enemy...
-        if (Math.abs(getTurnRemaining()) < 10) {
-            // move a little closer
-            if (e.getDistance() > 200) {
-                setAhead(e.getDistance() / 2);
-            }
-            // but not too close
-            if (e.getDistance() < 100) {
-                setBack(e.getDistance() * 2);
-            }
-            setFire(3.0);
-        }
-
-        // lock our radar onto our target
-        setTurnRadarRight(getHeading() - getRadarHeading() + enemyBearing);
+//        setTurnRight(enemyBearing);
+//
+//        // if we've turned toward our enemy...
+//        if (Math.abs(getTurnRemaining()) < 10) {
+//            // move a little closer
+//            if (e.getDistance() > 200) {
+//                setAhead(e.getDistance() / 2);
+//            }
+//            // but not too close
+//            if (e.getDistance() < 100) {
+//                setBack(e.getDistance() * 2);
+//            }
+//            setFire(3.0);
+//        }
+//
+//        // lock our radar onto our target
+//        setTurnRadarRight(getHeading() - getRadarHeading() + enemyBearing);
 
         myX = getX();
         myY = getY();
@@ -316,6 +325,7 @@ public class IRobot extends AdvancedRobot {
         curEneHP = getHPLevel(enemyHP);
         curMyDistance = getDistanceLevel(dis);
         curWaDistance = getDistanceFromWallLevel(myX, myY);
+        myOperationMode = operaMode.onAction;
 
     }
 
@@ -342,14 +352,25 @@ public class IRobot extends AdvancedRobot {
 
     @Override
     public void onHitWall(HitWallEvent e){
+        super.onHitWall(e);
         if(takeImmediate) {
             reward += immediatePenalty;
         }
+        avidObstacle();
     }
-
+    public void avidObstacle() {
+        setBack(100);
+        setTurnRight(30);
+        execute();
+    }
+    @Override
+    public void onHitRobot(HitRobotEvent e) {
+        super.onHitRobot(e);
+        avidObstacle();
+    }
     @Override
     public void onWin(WinEvent e){
-        saveTable();
+
         reward = terminalBonus;
         // why int instead double?
         int[] indexes = new int []{
@@ -360,6 +381,7 @@ public class IRobot extends AdvancedRobot {
                 preAction.ordinal()};
         Q = calQ(reward, onPolicy);
         lut.setQValue(indexes, Q);
+        saveTable();
         winRound++;
         totalRound++;
         if((totalRound % 20 == 0) && (totalRound != 0)){
@@ -370,7 +392,7 @@ public class IRobot extends AdvancedRobot {
 
     @Override
     public void onDeath(DeathEvent e){
-        saveTable();
+
         reward = terminalPenalty;
         // why int instead of double?
         int[] indexes = new int []{
@@ -381,6 +403,7 @@ public class IRobot extends AdvancedRobot {
                 preAction.ordinal()};
         Q = calQ(reward, onPolicy);
         lut.setQValue(indexes, Q);
+        saveTable();
         totalRound++;
         if((totalRound % 20 == 0) && (totalRound != 0)){
             winPercentage[round++] = (double) winRound / 20;
