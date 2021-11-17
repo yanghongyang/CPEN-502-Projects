@@ -17,7 +17,7 @@ public class IRobot extends AdvancedRobot {
     //Enum type
     public enum HP {low, medium, high};
     public enum Distance {close, medium, far};
-    public enum Action {fire, forwardLeft, forwardRight, backwardLeft, backwardRight, left, right, trackEnemy, escapeEnemy};
+    public enum Action {fire, left, right, forward, back};
     public enum operaMode {onScan, onAction};
 
     // Initialization: Current State
@@ -25,14 +25,14 @@ public class IRobot extends AdvancedRobot {
     private HP curEneHP = HP.high;
     private Distance curMyDistance = Distance.close; // distance between myRobot and the enemy
     private Distance curWaDistance = Distance.far; // distance between myRobot and the wall
-    private Action curAction = Action.trackEnemy;
+    private Action curAction = Action.forward;
 
     // Initialization: Previous State
     private HP preMyHP = HP.high;
     private HP preEneHP = HP.high;
     private Distance preMyDistance = Distance.close;
     private Distance preWaDistance = Distance.far;
-    private Action preAction = Action.trackEnemy;
+    private Action preAction = Action.forward;
 
     // Initialization: operationMode
     private operaMode myOperationMode= operaMode.onScan;
@@ -66,8 +66,8 @@ public class IRobot extends AdvancedRobot {
     private double reward = 0.0;
 
     /* Bonus and Penalty */
-    private final double immediateBonus = 0.5;
-    private final double terminalBonus = 1.0;
+    private final double immediateBonus = 0.1;
+    private final double terminalBonus = 2.0;
     private final double immediatePenalty = -0.1;
     private final double terminalPenalty = -0.2;
 
@@ -220,20 +220,6 @@ public class IRobot extends AdvancedRobot {
                             break;
                         }
 
-                        case trackEnemy: {
-                            setTurnRight(enemyBearing);
-                            setAhead(100);
-                            execute();
-                            break;
-                        }
-
-                        case escapeEnemy: {
-                            setTurnRight(enemyBearing + 180);
-                            setAhead(100);
-                            execute();
-                            break;
-                        }
-
                         case left: {
                             setTurnLeft(30);
                             execute();
@@ -245,29 +231,13 @@ public class IRobot extends AdvancedRobot {
                             execute();
                             break;
                         }
-                        //forwardLeft, forwardRight, backwardLeft, backwardRight
-                        case forwardLeft: {
-                            setTurnLeft(30);
+
+                        case forward: {
                             setAhead(100);
                             execute();
                             break;
                         }
-                        case forwardRight: {
-                            setTurnRight(30);
-                            setAhead(100);
-                            execute();
-                            break;
-                        }
-
-                        case backwardLeft: {
-                            setTurnLeft(30);
-                            setBack(100);
-                            execute();
-                            break;
-                        }
-
-                        case backwardRight: {
-                            setTurnRight(30);
+                        case back: {
                             setBack(100);
                             execute();
                             break;
@@ -369,9 +339,9 @@ public class IRobot extends AdvancedRobot {
         lut.setQValue(indexes, Q);
         winRound++;
         totalRound++;
-        if((totalRound % 50 == 0) && (totalRound != 0)){
-            winPercentage = (double) winRound / 50;
-            System.out.println(String.format("%d, %.5f",++round, winPercentage));
+        if((totalRound % 20 == 0) && (totalRound != 0)){
+            winPercentage = (double) winRound / 20;
+            System.out.println(String.format("%d, %.3f",++round, winPercentage));
             File folderDst1 = getDataFile(fileToSaveName);
             log.writeToFile(folderDst1, winPercentage, round);
             winRound = 0;
@@ -395,9 +365,9 @@ public class IRobot extends AdvancedRobot {
         lut.setQValue(indexes, Q);
         /*saveTable();*/
         totalRound++;
-        if((totalRound % 50 == 0) && (totalRound != 0)){
-            winPercentage = (double) winRound / 50;
-            System.out.println(String.format("%d, %.5f",++round, winPercentage));
+        if((totalRound % 20 == 0) && (totalRound != 0)){
+            winPercentage = (double) winRound / 20;
+            System.out.println(String.format("%d, %.3f",++round, winPercentage));
             File folderDst1 = getDataFile(fileToSaveName);
             log.writeToFile(folderDst1, winPercentage, round);
             winRound = 0;

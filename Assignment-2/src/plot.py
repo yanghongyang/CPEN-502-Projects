@@ -14,10 +14,11 @@ if __name__ == '__main__':
     print(round)
     print(winningrate)
     plt.plot(round, winningrate)
-    plt.xlabel('# of 20 rounds')
+    plt.xlabel('# of 100 rounds')
     plt.ylabel('Winning rate')
     plt.title('2-a)')
+
+    plt.savefig("E:\\2-a.png")
     plt.show()
-    plt.savefig("E:/2-a.png")
 
 
