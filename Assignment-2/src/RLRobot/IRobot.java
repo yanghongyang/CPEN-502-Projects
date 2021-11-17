@@ -19,7 +19,7 @@ public class IRobot extends AdvancedRobot {
     //Enum type
     public enum HP {low, medium, high};
     public enum Distance {close, medium, far};
-    public enum Action {fire, left, right, trackEnemy, escapeEnemy};
+    public enum Action {fire, left, right, forward, back};
     public enum operaMode {onScan, onAction};
 
     // Initialization: Current State
@@ -27,14 +27,14 @@ public class IRobot extends AdvancedRobot {
     private HP curEneHP = HP.high;
     private Distance curMyDistance = Distance.close; // distance between myRobot and the enemy
     private Distance curWaDistance = Distance.far; // distance between myRobot and the wall
-    private Action curAction = Action.trackEnemy;
+    private Action curAction = Action.forward;
 
     // Initialization: Previous State
     private HP preMyHP = HP.high;
     private HP preEneHP = HP.high;
     private Distance preMyDistance = Distance.close;
     private Distance preWaDistance = Distance.far;
-    private Action preAction = Action.trackEnemy;
+    private Action preAction = Action.forward;
 
     // Initialization: operationMode
     private operaMode myOperationMode= operaMode.onScan;
@@ -59,7 +59,7 @@ public class IRobot extends AdvancedRobot {
     // Discount factor
     private double gamma = 0.9;
     // Learning rate
-    private static double alpha = 0.05;
+    private static double alpha = 0.1;
     // Random number for epsilon-greedy policy
     private static double epsilon = 0.0;
     // Q
@@ -89,7 +89,7 @@ public class IRobot extends AdvancedRobot {
     // on-policy/off-policy; terminal/intermedia; epsilon;
     static String policy = onPolicy? "onPolicy":"offPolicy";
     static String whetherImmediate = takeImmediate? "immediate":"terminal";
-    public static String fileToSave = String.join("-", IRobot.class.getSimpleName(), formattedDate, policy, whetherImmediate, Double.toString(immediateBonus), Double.toString(terminalBonus), Double.toString(immediatePenalty), Double.toString(terminalPenalty), Double.toString(epsilon), "winningRate");
+    public static String fileToSave = String.join("-", IRobot.class.getSimpleName(), formattedDate, policy, whetherImmediate, Double.toString(immediateBonus), Double.toString(terminalBonus), Double.toString(immediatePenalty), Double.toString(terminalPenalty), Double.toString(epsilon), Double.toString(alpha), "winningRate");
     public static String fileToSaveName = fileToSave + ".log";
     public static String fileToSaveLUT = IRobot.class.getSimpleName() + "-" + formattedDate + "-" + "LUT";
     static LogFile log = new LogFile();
@@ -241,16 +241,13 @@ public class IRobot extends AdvancedRobot {
                             break;
                         }
 
-                        case trackEnemy: {
-                            setTurnRight(enemyBearing);
+                        case forward: {
                             setAhead(100);
                             execute();
                             break;
                         }
-
-                        case escapeEnemy: {
-                            setTurnRight(enemyBearing + 180);
-                            setAhead(100);
+                        case back: {
+                            setBack(100);
                             execute();
                             break;
                         }
@@ -351,8 +348,8 @@ public class IRobot extends AdvancedRobot {
         lut.setQValue(indexes, Q);
         winRound++;
         totalRound++;
-        if((totalRound % 30 == 0) && (totalRound != 0)){
-            winPercentage = (double) winRound / 30;
+        if((totalRound % 20 == 0) && (totalRound != 0)){
+            winPercentage = (double) winRound / 20;
             System.out.println(String.format("%d, %.3f",++round, winPercentage));
             File folderDst1 = getDataFile(fileToSaveName);
             log.writeToFile(folderDst1, winPercentage, round);
@@ -377,8 +374,8 @@ public class IRobot extends AdvancedRobot {
         lut.setQValue(indexes, Q);
         /*saveTable();*/
         totalRound++;
-        if((totalRound % 30 == 0) && (totalRound != 0)){
-            winPercentage = (double) winRound / 30;
+        if((totalRound % 20 == 0) && (totalRound != 0)){
+            winPercentage = (double) winRound / 20;
             System.out.println(String.format("%d, %.3f",++round, winPercentage));
             File folderDst1 = getDataFile(fileToSaveName);
             log.writeToFile(folderDst1, winPercentage, round);
