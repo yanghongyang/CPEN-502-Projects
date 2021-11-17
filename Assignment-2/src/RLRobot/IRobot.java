@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class IRobot extends AdvancedRobot {
 
@@ -59,17 +61,17 @@ public class IRobot extends AdvancedRobot {
     // Learning rate
     private double alpha = 0.1;
     // Random number for epsilon-greedy policy
-    private double epsilon = 0.0;
+    private static double epsilon = 0.0;
     // Q
     private double Q = 0.0;
     // Reward
     private double reward = 0.0;
 
     /* Bonus and Penalty */
-    private final double immediateBonus = 0.1;
-    private final double terminalBonus = 2.0;
-    private final double immediatePenalty = -0.1;
-    private final double terminalPenalty = -0.2;
+    private static final double immediateBonus = 0.5;
+    private static final double terminalBonus = 1.0;
+    private static final double immediatePenalty = -0.1;
+    private static final double terminalPenalty = -0.2;
 
     // Whether take greedy method
     public static int curActionIndex;
@@ -81,8 +83,14 @@ public class IRobot extends AdvancedRobot {
     public static int winRound = 0;
 //    public static double[] winPercentage = new double[351];
     public static double winPercentage = 0.0;
-    public static String fileToSaveName = IRobot.class.getSimpleName() + "-"  + "winningRate"+ ".log";
-    public static String fileToSaveLUT = IRobot.class.getSimpleName() + "-"  + "LUT";
+    static LocalDateTime myDateObj = LocalDateTime.now();
+    static DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("HH-mm-ss");
+    static String formattedDate = myDateObj.format(myFormatObj);
+    // on-policy/off-policy; terminal/intermedia; epsilon;
+    static String policy = onPolicy? "onPolicy":"offPolicy";
+    static String whetherImmediate = takeImmediate? "immediate":"terminal";
+    public static String fileToSaveName = IRobot.class.getSimpleName() + "-" + formattedDate + "-" + policy + "-" + whetherImmediate + "-" + immediateBonus + "-" + terminalBonus + "-" + immediatePenalty + "-" + terminalPenalty + "-" + epsilon + "-winningRate"+ ".log";
+    public static String fileToSaveLUT = IRobot.class.getSimpleName() + "-" + formattedDate + "-" + "LUT";
     static LogFile log = new LogFile();
 
     public static LookUpTable lut = new LookUpTable(HP.values().length,
@@ -339,8 +347,8 @@ public class IRobot extends AdvancedRobot {
         lut.setQValue(indexes, Q);
         winRound++;
         totalRound++;
-        if((totalRound % 20 == 0) && (totalRound != 0)){
-            winPercentage = (double) winRound / 20;
+        if((totalRound % 30 == 0) && (totalRound != 0)){
+            winPercentage = (double) winRound / 30;
             System.out.println(String.format("%d, %.3f",++round, winPercentage));
             File folderDst1 = getDataFile(fileToSaveName);
             log.writeToFile(folderDst1, winPercentage, round);
@@ -365,8 +373,8 @@ public class IRobot extends AdvancedRobot {
         lut.setQValue(indexes, Q);
         /*saveTable();*/
         totalRound++;
-        if((totalRound % 20 == 0) && (totalRound != 0)){
-            winPercentage = (double) winRound / 20;
+        if((totalRound % 30 == 0) && (totalRound != 0)){
+            winPercentage = (double) winRound / 30;
             System.out.println(String.format("%d, %.3f",++round, winPercentage));
             File folderDst1 = getDataFile(fileToSaveName);
             log.writeToFile(folderDst1, winPercentage, round);
