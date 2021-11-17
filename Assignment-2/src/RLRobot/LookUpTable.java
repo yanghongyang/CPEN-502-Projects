@@ -1,7 +1,7 @@
 package RLRobot;
 
 import robocode.*;
-
+import robocode.RobocodeFileWriter;
 import java.lang.Math;
 import java.util.*;
 import java.io.*;
@@ -72,28 +72,21 @@ public class LookUpTable implements LUTInterface{
         visit[x[0]][x[1]][x[2]][x[3]][x[4]]++;
     }
 
-    public void save(File argFile) {
-        PrintStream saveFile = null;
-
-        try {
-            saveFile = new PrintStream(new RobocodeFileOutputStream(argFile));
-        } catch (IOException e) {
-//            e.printStackTrace();
-        }
-
+    public void save(File file) throws IOException {
         for(int i = 0; i < myHP; i++) {
             for(int j = 0; j < enemyHP; j++) {
                 for(int k = 0; k < distance; k++) {
                     for(int m = 0; m < distanceWall; m++) {
                         for(int n = 0; n < actionSize; n++) {
-                            String s = String.format("%d,%d,%d,%d,%d,%3f,%d", myHP,enemyHP, distance, distanceWall, actionSize, LUT[myHP][enemyHP][distance][distanceWall][actionSize],visit[myHP][enemyHP][distance][distanceWall][actionSize]);
-                            saveFile.println(s);
+                            String s = String.format("%d,%d,%d,%d,%d,%3f,%d", i,j, k, m, n, LUT[i][j][k][m][n],visit[i][j][k][m][n]);
+                            RobocodeFileWriter fileWriter = new RobocodeFileWriter(file.getAbsolutePath(), true);
+                            fileWriter.write(s + "\r\n");
+                            fileWriter.close();
                         }
                     }
                 }
             }
         }
-        saveFile.close();
     }
 
     public void load(String argFileName) throws IOException {

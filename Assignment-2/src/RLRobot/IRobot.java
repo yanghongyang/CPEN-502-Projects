@@ -57,7 +57,7 @@ public class IRobot extends AdvancedRobot {
     // Discount factor
     private double gamma = 0.9;
     // Learning rate
-    private double alpha = 0.7;
+    private double alpha = 0.1;
     // Random number for epsilon-greedy policy
     private double epsilon = 0.0;
     // Q
@@ -66,8 +66,8 @@ public class IRobot extends AdvancedRobot {
     private double reward = 0.0;
 
     /* Bonus and Penalty */
-    private final double immediateBonus = 2.0;
-    private final double terminalBonus = 3.0;
+    private final double immediateBonus = 0.5;
+    private final double terminalBonus = 1.0;
     private final double immediatePenalty = -0.1;
     private final double terminalPenalty = -0.2;
 
@@ -82,6 +82,7 @@ public class IRobot extends AdvancedRobot {
 //    public static double[] winPercentage = new double[351];
     public static double winPercentage = 0.0;
     public static String fileToSaveName = IRobot.class.getSimpleName() + "-"  + "winningRate"+ ".log";
+    public static String fileToSaveLUT = IRobot.class.getSimpleName() + "-"  + "LUT";
     static LogFile log = new LogFile();
 
     public static LookUpTable lut = new LookUpTable(HP.values().length,
@@ -89,9 +90,6 @@ public class IRobot extends AdvancedRobot {
             Distance.values().length,
             Distance.values().length,
             Action.values().length);
-
-    // save the winPercentage
-//    static RLRobot.LogFile log = new RLRobot.LogFile();
 
     // Get the level of HP
     public HP getHPLevel(double hp) {
@@ -194,9 +192,6 @@ public class IRobot extends AdvancedRobot {
         setBodyColor(Color.blue);
         setRadarColor(Color.white);
         curMyHP = HP.high;
-
-
-
         while (true) {
             switch (myOperationMode) {
                 case onScan: {
@@ -298,23 +293,6 @@ public class IRobot extends AdvancedRobot {
     public void onScannedRobot(ScannedRobotEvent e) {
         super.onScannedRobot(e);
         enemyBearing = e.getBearing();
-//        setTurnRight(enemyBearing);
-//
-//        // if we've turned toward our enemy...
-//        if (Math.abs(getTurnRemaining()) < 10) {
-//            // move a little closer
-//            if (e.getDistance() > 200) {
-//                setAhead(e.getDistance() / 2);
-//            }
-//            // but not too close
-//            if (e.getDistance() < 100) {
-//                setBack(e.getDistance() * 2);
-//            }
-//            setFire(3.0);
-//        }
-//
-//        // lock our radar onto our target
-//        setTurnRadarRight(getHeading() - getRadarHeading() + enemyBearing);
 
         myX = getX();
         myY = getY();
@@ -389,17 +367,15 @@ public class IRobot extends AdvancedRobot {
                 preAction.ordinal()};
         Q = calQ(reward, onPolicy);
         lut.setQValue(indexes, Q);
-//        saveTable();
         winRound++;
         totalRound++;
-        if((totalRound % 20 == 0) && (totalRound != 0)){
-//            winPercentage[round++] = (double) winRound / 20;
-            winPercentage = (double) winRound / 20;
-            // writeToFile(File fileToWrite, double winRate, int roundCount)
+        if((totalRound % 50 == 0) && (totalRound != 0)){
+            winPercentage = (double) winRound / 50;
             System.out.println(String.format("%d, %.5f",++round, winPercentage));
             File folderDst1 = getDataFile(fileToSaveName);
             log.writeToFile(folderDst1, winPercentage, round);
             winRound = 0;
+            //saveTable();
         }
 
     }
@@ -417,22 +393,22 @@ public class IRobot extends AdvancedRobot {
                 preAction.ordinal()};
         Q = calQ(reward, onPolicy);
         lut.setQValue(indexes, Q);
-//        saveTable();
+        /*saveTable();*/
         totalRound++;
-        if((totalRound % 20 == 0) && (totalRound != 0)){
-            winPercentage = (double) winRound / 20;
-            // writeToFile(File fileToWrite, double winRate, int roundCount)
+        if((totalRound % 50 == 0) && (totalRound != 0)){
+            winPercentage = (double) winRound / 50;
             System.out.println(String.format("%d, %.5f",++round, winPercentage));
             File folderDst1 = getDataFile(fileToSaveName);
             log.writeToFile(folderDst1, winPercentage, round);
-//            saveWinPercentage();
             winRound = 0;
+            //saveTable();
         }
 
     }
     public void saveTable() {
         try {
-            lut.save(getDataFile("lut.dat"));
+            String file = fileToSaveLUT + "-" + round + ".log";
+            lut.save(getDataFile(file));
         } catch (Exception e) {
             System.out.println("Save Error!" + e);
         }
@@ -440,19 +416,9 @@ public class IRobot extends AdvancedRobot {
 
     public void loadTable() {
         try {
-            lut.load("lut.dat");
+            lut.load(fileToSaveLUT);
         } catch (Exception e) {
             System.out.println("Save Error!" + e);
         }
     }
-//    public void saveWinPercentage() {
-//        try {
-//            FileWriter fileWriter = new FileWriter("winningrate.txt");
-//            String s = String.format("%d, %.5f", round, winPercentage[round]);
-//            fileWriter.write(s + "\n");
-//            fileWriter.close();
-//        } catch (Exception e) {
-//            System.out.println("Save Error!" + e);
-//        }
-//    }
 }
