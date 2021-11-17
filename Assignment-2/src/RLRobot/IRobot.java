@@ -19,7 +19,7 @@ public class IRobot extends AdvancedRobot {
     //Enum type
     public enum HP {low, medium, high};
     public enum Distance {close, medium, far};
-    public enum Action {fire, left, right, forward, back};
+    public enum Action {fire, left, right, trackEnemy, escapeEnemy};
     public enum operaMode {onScan, onAction};
 
     // Initialization: Current State
@@ -27,14 +27,14 @@ public class IRobot extends AdvancedRobot {
     private HP curEneHP = HP.high;
     private Distance curMyDistance = Distance.close; // distance between myRobot and the enemy
     private Distance curWaDistance = Distance.far; // distance between myRobot and the wall
-    private Action curAction = Action.forward;
+    private Action curAction = Action.trackEnemy;
 
     // Initialization: Previous State
     private HP preMyHP = HP.high;
     private HP preEneHP = HP.high;
     private Distance preMyDistance = Distance.close;
     private Distance preWaDistance = Distance.far;
-    private Action preAction = Action.forward;
+    private Action preAction = Action.trackEnemy;
 
     // Initialization: operationMode
     private operaMode myOperationMode= operaMode.onScan;
@@ -59,7 +59,7 @@ public class IRobot extends AdvancedRobot {
     // Discount factor
     private double gamma = 0.9;
     // Learning rate
-    private double alpha = 0.1;
+    private static double alpha = 0.05;
     // Random number for epsilon-greedy policy
     private static double epsilon = 0.0;
     // Q
@@ -84,7 +84,7 @@ public class IRobot extends AdvancedRobot {
 //    public static double[] winPercentage = new double[351];
     public static double winPercentage = 0.0;
     static LocalDateTime myDateObj = LocalDateTime.now();
-    static DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("HH:mm:ss");
+    static DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("HH-mm-ss");
     static String formattedDate = myDateObj.format(myFormatObj);
     // on-policy/off-policy; terminal/intermedia; epsilon;
     static String policy = onPolicy? "onPolicy":"offPolicy";
@@ -241,13 +241,16 @@ public class IRobot extends AdvancedRobot {
                             break;
                         }
 
-                        case forward: {
+                        case trackEnemy: {
+                            setTurnRight(enemyBearing);
                             setAhead(100);
                             execute();
                             break;
                         }
-                        case back: {
-                            setBack(100);
+
+                        case escapeEnemy: {
+                            setTurnRight(enemyBearing + 180);
+                            setAhead(100);
                             execute();
                             break;
                         }
