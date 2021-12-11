@@ -81,10 +81,10 @@ public class MyRobotLUT extends AdvancedRobot {
     /**
      * Good/bad instant/terminal reward values
      */
-    public final double badInstReward = -0.25;
-    public final double goodInstReward = 1.0;
-    public final double badTermReward = -0.5;
-    public final double goodTermReward = 2.0;
+    public final double badInstReward = -0.1;
+    public final double goodInstReward = 0.5;
+    public final double badTermReward = -0.2;
+    public final double goodTermReward = 1.0;
     public double currReward = 0.0;
 
     /**
@@ -319,17 +319,17 @@ public class MyRobotLUT extends AdvancedRobot {
 //    /** have bugs!!!! **/
     public void moveAway() {
         switch (currStateAction) {
-            case a1:
+            case a1: // if moving forward now
                 setBack(50);
                 execute();
                 break;
-            case a2:
+            case a2: // if moving backward now
                 setAhead(50);
                 execute();
                 break;
-            case a3:
+            case a3: // if turning left/right now
             case a4:
-            case a5: {
+            case a5: { // if firing now
                 back(20);
                 setTurnRight(30);
                 setBack(50);
@@ -441,27 +441,32 @@ public class MyRobotLUT extends AdvancedRobot {
     // Hit by enemy robot --> bad instant reward
     @Override
     public void onHitRobot(HitRobotEvent event) {
-        currReward = badInstReward;
+        currReward += badInstReward;
         moveAway();
     }
 
     // Enemy hit by bullet --> good instant reward
     @Override
     public void onBulletHit(BulletHitEvent event) {
-        currReward = goodInstReward;
+        currReward += goodInstReward;
     }
 
     // Hit by enemy bullet --> bad instant reward
     @Override
     public void onHitByBullet(HitByBulletEvent event) {
-        currReward = badInstReward;
+        currReward += badInstReward;
     }
 
     // Hit wall --> bad instant reward
     @Override
     public void onHitWall(HitWallEvent e) {
-        currReward = badInstReward;
+        currReward += badInstReward;
         moveAway();
+    }
+
+    @Override
+    public void onBulletMissed(BulletMissedEvent e){
+        currReward += goodInstReward;
     }
 
     // Win the round --> good terminal reward
