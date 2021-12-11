@@ -7,17 +7,17 @@ import java.io.*;
  * Lookup table for Robocode Reinforcement Learning
  * THis LUT table maps {states, action} to Q value
  * State-action representation (4 states + 1 action):
- * - State 1 : myEnergy (3)
- *   - {0-33, 34-67, 68-100}
- * - State 2 : enemyEnergy (3)
- *   - {0-33, 34-67, 68-100}
+ * - State 1 : myEnergy (4)
+ *   - {0, 1-33, 34-67, 68-100}
+ * - State 2 : enemyEnergy (4)
+ *   - {0, 1-33, 34-67, 68-100}
  * - State 3 : Distance to enemy (4)
  *   - {1-250, 251-500, 501-750, 751-1000}
  * - State 4 : Distance to center (3)
  *   - {0-150, 151-300, 301-500}
  * - Action (5):
  *   - {forward, backward, left, right, fire}
- * Total number of entries in LUT = 3 x 3 x 4 x 3 x 5 = 540
+ * Total number of entries in LUT = 4 x 4 x 4 x 3 x 5 = 540
  */
 
 public class LUT implements CommonInterface {
