@@ -12,7 +12,7 @@ public class MyRobotLUT extends AdvancedRobot {
     /**
      * Reinforcement Learning parameters
      */
-    final double alpha = 0.7;   // Learning rate (0 if no learning)
+    final double alpha = 0.001;   // Learning rate (0 if no learning)
     //final double alpha = 0.0;   // No learning
     final double gamma = 0.9;   // Discount factor
     final double epsilon = 0.1; // Exploration factor (0 if always greedy)
@@ -81,9 +81,9 @@ public class MyRobotLUT extends AdvancedRobot {
     /**
      * Good/bad instant/terminal reward values
      */
-    public final double badInstReward = -0.1;
+    public final double badInstReward = -0.25;
     public final double goodInstReward = 0.5;
-    public final double badTermReward = -0.2;
+    public final double badTermReward = -0.5;
     public final double goodTermReward = 1.0;
     public double currReward = 0.0;
 
@@ -441,32 +441,32 @@ public class MyRobotLUT extends AdvancedRobot {
     // Hit by enemy robot --> bad instant reward
     @Override
     public void onHitRobot(HitRobotEvent event) {
-        currReward += badInstReward;
+        currReward = badInstReward;
         moveAway();
     }
 
     // Enemy hit by bullet --> good instant reward
     @Override
     public void onBulletHit(BulletHitEvent event) {
-        currReward += goodInstReward;
+        currReward = goodInstReward;
     }
 
     // Hit by enemy bullet --> bad instant reward
     @Override
     public void onHitByBullet(HitByBulletEvent event) {
-        currReward += badInstReward;
+        currReward = badInstReward;
     }
 
     // Hit wall --> bad instant reward
     @Override
     public void onHitWall(HitWallEvent e) {
-        currReward += badInstReward;
+        currReward = badInstReward;
         moveAway();
     }
 
     @Override
     public void onBulletMissed(BulletMissedEvent e){
-        currReward += goodInstReward;
+        currReward = goodInstReward;
     }
 
     // Win the round --> good terminal reward
